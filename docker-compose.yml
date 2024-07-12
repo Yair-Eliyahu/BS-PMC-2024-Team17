@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://user:password@db:5432/mydatabase
+      - NEXTAUTH_URL=http://localhost:3001
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  supabase:
+    image: supabase/postgres:13.3.0
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: supersecurepassword
+      POSTGRES_DB: supabase
+      POSTGRES_USER: postgres
+    volumes:
+      - supabase-data:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  supabase-data:
