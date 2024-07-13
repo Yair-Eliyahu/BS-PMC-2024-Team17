@@ -3,7 +3,7 @@ pipeline {
     tools {
         nodejs "node"
     }
-    enviorment{
+    environment{
         imageName = "guyezra22/QuizzerAI"
         registryCredential = 'guyezra22'
         dockerImage = ''
