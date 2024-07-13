@@ -31,12 +31,10 @@ pipeline {
 
         stage("Deploy Image"){
             steps{
-                script{
-                    docker.withRegistry("https://registry.hub.docker.com", 'dockerhub-creds'){
-
-                        dockerImage.push("${env.BUILD_NUMBER}")
-                    }
-                }
+               
+                sh 'cp -r build/* /var/www/html/'
+		        sh 'sudo nginx -s reload'
+                
             }
         }
     }
