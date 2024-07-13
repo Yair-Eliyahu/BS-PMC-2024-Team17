@@ -3,12 +3,13 @@ FROM node:latest
 WORKDIR /app
 
 COPY package.json /app
+COPY package-lock.json /app
 
-RUN npm install 
+RUN npm install --silent
 
-COPY . /app
+COPY . ./
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm",  "start"]
 
