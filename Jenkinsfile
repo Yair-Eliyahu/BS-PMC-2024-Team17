@@ -31,11 +31,11 @@ pipeline {
 
         stage("Deploy Image"){
             steps{
-               
-               scrpit{
-                sh 'docker build -t guyezra22/jenkins_app .'
-               }
-                
+                script{
+                    docker.withRegistry("https://registry.hub.docker.com", 'dockerhub-creds'){
+                        dockerImage.push("${env.BUILD_NUMBER}")
+                    }
+                }
             }
         }
     
