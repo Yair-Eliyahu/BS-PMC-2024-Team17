@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools {
-        nodejs "node"
-    }
+    // tools {
+    //     nodejs "node"
+    // }
     enviorment{
         imageName = "guyezra22/QuizzerAI"
         registryCredential = 'guyezra22'
