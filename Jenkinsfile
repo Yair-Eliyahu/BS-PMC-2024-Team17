@@ -32,10 +32,12 @@ pipeline {
         stage("Deploy Image"){
             steps{
                
-                sh 'cp -r build/* /var/www/html/'
-		        sh 'sudo nginx -s reload'
+               scrpit{
+                sh 'docker build -t guyezra22/jenkins_app .'
+               }
                 
             }
         }
+    
     }
 }
