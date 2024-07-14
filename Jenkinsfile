@@ -7,23 +7,21 @@ pipeline {
     }
 
     environment{
-        imageName = "guyezra22/QuizzerAI"
+        imageName = "guyezra22/jenkins_app"
         registryCredential = 'guyezra22'
         dockerImage = ''
     }
     stages{
         stage("Install Dependencies"){
             steps{
-                sh ''' 
-                npm init
-                npm install --save-dev jest
-                '''
+                sh 'npm install'
+                sh 'npm install --save-dev jest'
             }
         }
 
         stage("Tests"){
             steps{
-                sh 'npm  run build'
+                sh 'npm test'
             }
         }
 
