@@ -1,44 +1,37 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:14'
-            args ' -u root:root'
-        }
-    }
+    agent any
 
-    environment{
-        imageName = "guyezra22/jenkins_app"
-        registryCredential = 'guyezra22'
-        dockerImage = ''
-    }
     stages{
         stage("Install Dependencies"){
+            agent{
+                docker{
+                    image 'node:latest'
+                }
+            }
             steps{
-                sh 'npm install'
-                sh 'npm install --save-dev jest'
+                sh 'npm install -g npm@latest'
+            }
+        }
+
+        stage("Build"){
+            agent{
+                docker{
+                    image 'node:latest'
+                }
+            }
+            steps{
+                sh 'npm run build'
             }
         }
 
         stage("Tests"){
-            steps{
-                sh 'npm test'
-            }
-        }
-
-        stage("Building Image"){
-            steps{
-                script{
-                    dockerImage = docker.build imageName
+            agent{
+                docker{
+                    image 'node:latest'
                 }
             }
-        }
-
-        stage("Deploy Image"){
             steps{
-               
-                sh 'cp -r build/* /var/www/html/'
-		        sh 'sudo nginx -s reload'
-                
+                sh 'npm test'
             }
         }
     }
