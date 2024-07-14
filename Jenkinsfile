@@ -4,7 +4,7 @@ pipeline {
     //     nodejs "node"
     // }
     environment{
-        imageName = "guyezra22/QuizzerAI"
+        imageName = "guyezra22/jenkins_app"
         registryCredential = 'guyezra22'
         dockerImage = ''
     }
