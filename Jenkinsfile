@@ -1,12 +1,13 @@
 pipeline {
-    agent any 
-    
-    environment{
-        imageName = "guyezra22/jenkins_app"
+    agent any
+    // tools {
+    //     nodejs "node"
+    // }
+    enviorment{
+        imageName = "guyezra22/QuizzerAI"
         registryCredential = 'guyezra22'
         dockerImage = ''
     }
-
     stages{
         stage("Install Dependencies"){
             steps{
@@ -30,15 +31,11 @@ pipeline {
 
         stage("Deploy Image"){
             steps{
-                script{
-                    docker.withRegistry("https://registry.hub.docker.com", 'dockerhub-creds'){
-                        dockerImage.push("${env.BUILD_NUMBER}")
-                    }
-                }
+               
+                sh 'cp -r build/* /var/www/html/'
+		        sh 'sudo nginx -s reload'
+                
             }
         }
     }
 }
-
-
-
