@@ -24,7 +24,7 @@ pipeline {
             }
         }
         steps {
-            sh 'cd '.\Sami QuizzerAI\' && npm test'
+            sh 'npm test'
         }
     }
 
