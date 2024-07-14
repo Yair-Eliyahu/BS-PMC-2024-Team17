@@ -18,7 +18,9 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm install'
+                dir('Sami_QuizzerAI'){
+                    sh 'npm install'
+                }
             }
         }
 
