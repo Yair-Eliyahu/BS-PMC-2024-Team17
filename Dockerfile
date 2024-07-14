@@ -1,16 +1,14 @@
 # Use an official Node.js runtime as a parent image
-FROM node:latest
+FROM node:18-alpine
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json
-COPY package.json ./
-COPY package-lock.json ./
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-
-# Install dependencies
-RUN npm install -g npm@latest
+# Install npm globally and install dependencies
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
@@ -19,5 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the application
-CMD ["npm" , "start"]
-
+CMD ["npm", "start"]
