@@ -17,6 +17,7 @@ pipeline {
                 sh ''' 
                 npm init
                 npm install --save-dev jest
+                npm install 
                 '''
             }
         }
