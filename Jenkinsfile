@@ -18,13 +18,10 @@ pipeline {
         }
 
         stage('Run Jest Tests') {
-        agent {
-            docker {
-                image 'node:lts'
+        
+            steps {
+                sh 'npm test'
             }
-        }
-        steps {
-            sh 'npm test'
         }
     }
 
