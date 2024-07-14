@@ -15,7 +15,6 @@ pipeline {
         stage("Install Dependencies"){
             steps{
                 sh ''' 
-                npm init
                 npm install --save-dev jest
                 npm install  jest
                 '''
