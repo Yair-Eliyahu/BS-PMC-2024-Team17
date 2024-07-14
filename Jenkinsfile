@@ -7,16 +7,21 @@ pipeline {
                 docker { image 'node:18-alpine' }
             }
             steps{
-                sh 'npm install'
+                dir('Sami_QuizzerAI'){
+                    sh 'npm install'
+                }
             }
         }
 
-        stage("Run Dev"){
+        stage("Build"){
             agent{
                 docker { image 'node:18-alpine' }
             }
             steps{
-                sh 'npm run dev'
+                dir('Sami_QuizzerAI'){
+                    sh 'npm run build'
+                }
+                
             }
         }
 
@@ -25,8 +30,10 @@ pipeline {
                 docker { image 'node:18-alpine' }
             }
             steps{
-                sh 'cd Sami_QuizzerAI'
-                sh 'npm test'
+                dir('Sami_QuizzerAI'){
+                    sh 'npm test'
+                }
+                
             }
         }
         

@@ -16,11 +16,11 @@ RUN npm install
 COPY . .
 
 #run the dev server of the app 
-RUN npm run dev
+RUN npm run build 
 
 # Expose the necessary port
 EXPOSE 3000
 
 # Run the application
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
 
