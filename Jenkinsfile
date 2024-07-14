@@ -18,17 +18,6 @@ pipeline {
             }
         }
 
-        stage("Tests") {
-            steps{
-                script{
-                    dir('Sami_QuizzerAI'){
-                        sh 'npm test'
-                    }
-                }
-            }
-            
-        }
-
         stage("Building Image") {
             steps {
                 script {
@@ -45,6 +34,16 @@ pipeline {
                     }
                 }
             }
+        }
+        stage("Tests") {
+            steps{
+                script{
+                    dir('Sami_QuizzerAI'){
+                        sh 'npm test'
+                    }
+                }
+            }
+            
         }
     }
 }
