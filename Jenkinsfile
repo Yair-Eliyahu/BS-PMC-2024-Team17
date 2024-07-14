@@ -1,43 +1,30 @@
 pipeline {
     agent any
-    // tools {
-    //     nodejs "node"
-    // }
-    environment{
-        imageName = "guyezra22/QuizzerAI"
-        registryCredential = 'guyezra22'
-        dockerImage = ''
+    environment {
+        compose_service_name = "react-jenkins-docker"
+        workspace = "/app"
     }
-    stages{
-        stage("Install Dependencies"){
-            steps{
-                sh 'npm install'
-            }
-        }
-
-        stage("Tests"){
-            steps{
-                sh 'npm test'
-            }
-        }
-
-        stage("Building Image"){
-            steps{
-                script{
-                    dockerImage = docker.build imageName
+    stages {
+        stage('Checkout Source') {
+            steps {
+                ws("${workspace}") {
+                    checkout scm
                 }
             }
         }
-
-        stage("Deploy Image"){
-            steps{
-                script{
-                    docker.withRegistry("https://registry.hub.docker.com", 'dockerhub-creds'){
-                        dockerImage.push("${env.BUILD_NUMBER}")
-                    }
+        stage('Docker Comopse Build') {
+            steps {
+                ws("${workspace}"){
+                    sh "docker compose build --no-cache ${compose_service_name}"
                 }
             }
         }
-    
+        stage('Docker Comopse Up') {
+            steps {
+                ws("${workspace}"){
+                    sh "docker compose up --no-deps -d ${compose_service_name}"
+                }
+            }
+        }
     }
 }
