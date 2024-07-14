@@ -14,7 +14,7 @@ pipeline {
     stages{
         stage("Install Dependencies"){
             steps{
-                sh 'npm install --save-dev @types/jest.'
+                sh 'npm install --save-dev jest'
                 sh 'npm install'
             }
         }
@@ -22,6 +22,9 @@ pipeline {
         stage("Tests"){
             steps{
                 dir('Sami_QuizzerAI'){
+                    sh 'cd src'
+                    sh 'cd components'
+                    sh 'cd __tests__'
                     sh 'npm test'
                 }
                 
