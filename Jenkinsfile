@@ -21,10 +21,7 @@ pipeline {
 
         stage("Tests"){
             steps{
-                dir('Sami_QuizzerAI'){
-                    sh 'cd src'
-                    sh 'cd components'
-                    sh 'cd __tests__'
+                dir('src'){
                     sh 'npm test'
                 }
                 
