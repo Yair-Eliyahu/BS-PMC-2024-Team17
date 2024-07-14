@@ -17,11 +17,16 @@ pipeline {
             }
         }
 
-        stage("Tests") {
-            steps {
-                sh 'npm run test'
+        stage('Run Jest Tests') {
+        agent {
+            docker {
+                image 'node:lts'
             }
         }
+        steps {
+            sh 'npm run test'
+        }
+    }
 
         stage("Building Image") {
             steps {
