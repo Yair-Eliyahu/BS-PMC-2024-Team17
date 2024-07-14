@@ -1,5 +1,4 @@
 pipeline {
-    agent any
 
     environment{
         imageName = "guyezra22/jenkins_app"
