@@ -6,7 +6,7 @@ pipeline {
         }
     }
 
-    enviorment{
+    environment{
         imageName = "guyezra22/QuizzerAI"
         registryCredential = 'guyezra22'
         dockerImage = ''
