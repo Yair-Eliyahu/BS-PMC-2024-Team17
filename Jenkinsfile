@@ -12,6 +12,11 @@ pipeline {
     }
     stages {
         stage("Install Dependencies") {
+            agent {
+                docker {
+                    image 'node:lts'
+                }
+            }
             steps {
                 sh 'npm install'
             }
