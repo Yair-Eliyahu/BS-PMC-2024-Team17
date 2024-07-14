@@ -4,7 +4,7 @@ pipeline {
     stages{
         stage("Install Dependencies"){
             agent{
-                docker { image 'node:18-alpine' }
+                docker { image 'node:lts' }
             }
             steps{
                 sh 'cd Sami_QuizzerAI'
@@ -14,7 +14,7 @@ pipeline {
 
         stage("Build"){
             agent{
-                docker { image 'node:18-alpine' }
+                docker { image 'node:lts' }
             }
             steps{
                 sh 'cd Sami_QuizzerAI'
@@ -24,7 +24,7 @@ pipeline {
 
         stage("Test"){
             agent{
-                docker { image 'node:18-alpine' }
+                docker { image 'node:lts' }
             }
             steps{
                 sh 'cd Sami_QuizzerAI'
