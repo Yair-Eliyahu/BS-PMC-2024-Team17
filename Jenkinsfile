@@ -20,8 +20,10 @@ pipeline {
 
         stage("Tests"){
             steps{
+                dir('Sami_QuizzerAI'){
+                    sh 'npm test'
+                }
                 
-                sh 'npm test'
             }
         }
 
