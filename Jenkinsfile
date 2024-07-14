@@ -1,11 +1,16 @@
 pipeline {
-    agent any
+    agent{
+        docker{
+            image 'node:lts'
+            args '-u root:root'
+        }
+    }
 
     stages{
         stage("Install Dependencies"){
             agent{
                 docker{
-                    image 'node:latest'
+                    image 'node:lts'
                 }
             }
             steps{
@@ -16,7 +21,7 @@ pipeline {
         stage("Build"){
             agent{
                 docker{
-                    image 'node:latest'
+                    image 'node:lts'
                 }
             }
             steps{
@@ -27,7 +32,7 @@ pipeline {
         stage("Tests"){
             agent{
                 docker{
-                    image 'node:latest'
+                    image 'node:lts'
                 }
             }
             steps{
