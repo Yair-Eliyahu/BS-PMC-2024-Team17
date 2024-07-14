@@ -16,7 +16,7 @@ pipeline {
         stage('Pull Docker Image') {
             steps {
                 script {
-                    sh 'docker pull guyezra22/jenkins_app:latest'
+                    sh 'docker pull guyezra22/jenkins_app'
                 }
             }
         }
