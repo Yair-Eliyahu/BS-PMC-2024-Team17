@@ -4,7 +4,7 @@ FROM node:lts
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json
 COPY package.json /.
 
 # Install dependencies
