@@ -1,41 +1,26 @@
 pipeline {
-    agent{
-        docker{
+    agent {
+        docker {
             image 'node:lts'
             args '-u root:root'
         }
     }
-
-    stages{
-        stage("Install Dependencies"){
-            agent{
-                docker{
-                    image 'node:lts'
-                }
-            }
-            steps{
+    stages {
+        stage("Install Dependencies") {
+            steps {
                 sh 'npm install -g npm@latest'
+                sh 'npm install'
             }
         }
 
-        stage("Build"){
-            agent{
-                docker{
-                    image 'node:lts'
-                }
-            }
-            steps{
+        stage("Build") {
+            steps {
                 sh 'npm run build'
             }
         }
 
-        stage("Tests"){
-            agent{
-                docker{
-                    image 'node:lts'
-                }
-            }
-            steps{
+        stage("Tests") {
+            steps {
                 sh 'npm test'
             }
         }
