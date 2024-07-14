@@ -21,9 +21,7 @@ pipeline {
             steps{
                 script{
                     dir('Sami_QuizzerAI'){
-                        docker.image('guyezra22/jenkins_app').inside('-u root:root'){
-                            sh 'npm test'
-                        }
+                        sh 'npm test'
                     }
                 }
             }
