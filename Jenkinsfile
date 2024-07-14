@@ -1,23 +1,29 @@
 pipeline {
-    agent any
-    // tools {
-    //     nodejs "node"
-    // }
+    agent {
+        docker {
+            image 'node:14'
+            args ' -u root:root'
+        }
+    }
+
     environment{
-        imageName = "guyezra22/jenkins_app"
+        imageName = "guyezra22/QuizzerAI"
         registryCredential = 'guyezra22'
         dockerImage = ''
     }
     stages{
         stage("Install Dependencies"){
             steps{
-                sh 'npm install'
+                sh ''' 
+                npm init
+                npm install --save-dev jest
+                '''
             }
         }
 
         stage("Tests"){
             steps{
-                sh 'npm test'
+                sh 'npm  run build'
             }
         }
 
