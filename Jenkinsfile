@@ -1,48 +1,34 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:14'
-            args ' -u root:root'
-        }
-    }
+    agent any 
 
-    environment{
-        imageName = "guyezra22/QuizzerAI"
-        registryCredential = 'guyezra22'
-        dockerImage = ''
-    }
     stages{
         stage("Install Dependencies"){
+            agent{
+                docker { image 'node:18-alpine' }
+            }
             steps{
-                sh ''' 
-                npm init -y
-                npm install --save-dev jest
-                npm install  jest
-                '''
+                sh 'npm install'
             }
         }
 
-        stage("Tests"){
+        stage("Run Dev"){
+            agent{
+                docker { image 'node:18-alpine' }
+            }
             steps{
-                sh 'npm  run build'
+                sh 'npm run dev'
             }
         }
 
-        stage("Building Image"){
+        stage("Test"){
+            agent{
+                docker { image 'node:18-alpine' }
+            }
             steps{
-                script{
-                    dockerImage = docker.build imageName
-                }
+                sh 'cd Sami_QuizzerAI'
+                sh 'npm test'
             }
         }
-
-        stage("Deploy Image"){
-            steps{
-               
-                sh 'cp -r build/* /var/www/html/'
-		        sh 'sudo nginx -s reload'
-                
-            }
-        }
+        
     }
 }
