@@ -21,10 +21,7 @@ pipeline {
 
         stage("Tests"){
             steps{
-                dir('src'){
-                    sh 'npm test'
-                }
-                
+                sh 'npm test'
             }
         }
 
