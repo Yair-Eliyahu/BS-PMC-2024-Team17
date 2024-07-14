@@ -17,13 +17,11 @@ pipeline {
             }
         }
 
-        stage('Run Jest Tests') {
-        
+        stage("Tests") {
             steps {
                 sh 'npm test'
             }
         }
-    }
 
         stage("Building Image") {
             steps {
