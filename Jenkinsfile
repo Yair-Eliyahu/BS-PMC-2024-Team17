@@ -19,7 +19,7 @@ pipeline {
 
         stage("Tests") {
             steps {
-                sh 'cd Sami_QuizzerAI && npm test'
+                sh 'npm test'
             }
         }
 
