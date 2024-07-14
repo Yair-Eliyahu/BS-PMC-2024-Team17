@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18-alpine'
-            args '-u root:root'
-        }
-    }
+    agent any 
 
     stages{
         stage("Install Dependencies"){
@@ -12,9 +7,8 @@ pipeline {
                 docker { image 'node:18-alpine' }
             }
             steps{
-                dir('Sami_QuizzerAI'){
-                    sh 'npm install'
-                }
+                sh 'cd Sami_QuizzerAI'
+                sh 'npm install'
             }
         }
 
@@ -23,10 +17,8 @@ pipeline {
                 docker { image 'node:18-alpine' }
             }
             steps{
-                dir('Sami_QuizzerAI'){
-                    sh 'npm run build'
-                }
-                
+                sh 'cd Sami_QuizzerAI'
+                sh 'npm run build'
             }
         }
 
@@ -35,9 +27,8 @@ pipeline {
                 docker { image 'node:18-alpine' }
             }
             steps{
-                dir('Sami_QuizzerAI'){
-                    sh 'npm test'
-                }
+                sh 'cd Sami_QuizzerAI'
+                sh 'npm test'
             }
         }
     }
