@@ -12,15 +12,9 @@ pipeline {
     }
     stages {
         stage("Install Dependencies") {
-            agent {
-                docker {
-                    image 'node:lts'
-                }
-            }
             steps {
-                dir('Sami_QuizzerAI'){
-                    sh 'npm install'
-                }
+                sh 'npm install'
+                sh 'npm install --save-dev jest'
             }
         }
 
