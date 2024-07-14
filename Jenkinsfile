@@ -1,15 +1,6 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:14'
-            args '-u root:root'
-        }
-    }
-    environment {
-        imageName = "guyezra22/jenkins_app"
-        registryCredential = 'guyezra22'
-        dockerImage = ''
-    }
+    agent any 
+
     stages {
         stage("Install Dependencies") {
             steps {
@@ -17,33 +8,33 @@ pipeline {
                 sh 'npm install --save-dev jest'
             }
         }
-
-        stage("Building Image") {
+        stage('Pull Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build imageName
+                    sh 'docker pull guyezra22/jenkins_app:latest'
+                }
+            }
+        }
+        stage('List Docker Images') {
+            steps {
+                script {
+                    sh 'docker images'
                 }
             }
         }
 
-        stage("Deploy Image") {
-            steps {
-                script {
-                    docker.withRegistry("https://registry.hub.docker.com", 'dockerhub-creds') {
-                        dockerImage.push("${env.BUILD_NUMBER}")
-                    }
-                }
-            }
-        }
-        stage("Tests") {
+        stage("Tests"){
             steps{
-                script{
-                    dir('Sami_QuizzerAI'){
-                        sh 'npm test'
-                    }
+                dir('Sami_QuizzerAI'){
+                    sh 'npm test'
                 }
             }
-            
+        }
+
+        post {
+            always {
+                echo 'Pipeline finished.'
+            }
         }
     }
 }
