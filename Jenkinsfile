@@ -33,9 +33,7 @@ pipeline {
                 dir('Sami_QuizzerAI'){
                     sh 'npm test'
                 }
-                
             }
         }
-        
     }
 }
