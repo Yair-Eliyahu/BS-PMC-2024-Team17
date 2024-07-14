@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'node:lts'
-            args '-u root:root'
         }
     }
     stages {
