@@ -19,11 +19,11 @@ pipeline {
             }
         }
 
-        stage("Tests"){
-            steps{
-                // sh 'npm test'
-            }
-        }
+        // stage("Tests"){
+        //     steps{
+        //         // sh 'npm test'
+        //     }
+        // }
 
         stage("Building Image"){
             steps{
