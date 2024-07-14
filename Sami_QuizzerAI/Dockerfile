@@ -1,21 +1,23 @@
 # Use an official Node.js runtime as a parent image
-FROM node:lts
+FROM node:latest
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy package.json
-COPY package.json /.
+COPY package.json ./
+COPY package-lock.json ./
+
 
 # Install dependencies
-RUN npm install 
+RUN npm install -g npm@latest
 
 # Copy the rest of the application code
-COPY . /app
+COPY . .
 
 # Expose the necessary port
 EXPOSE 3000
 
 # Run the application
-CMD ["npm" , "run", "start"]
+CMD ["npm" , "start"]
 
