@@ -5,6 +5,7 @@ import { set } from "react-hook-form";
 import ProgressBar from "@/components/progressBar";
 import { ChevronLeft, X } from "lucide-react";
 import ResultCard from "./ResultCard";
+import QuizzSubmission from "./QuizzSubmission";
 
 
 const questions = [
@@ -72,6 +73,20 @@ export default function Home() {
         }
         setIsCorrect(isCurrentCorrect);
     }
+
+    const scorePercentage: number = Math.round((score / questions.length) * 100);
+
+    if(submitted) {
+        return (
+            <QuizzSubmission
+                score={score}
+                scorePercentage={scorePercentage}
+                totalQuestions={questions.length}
+                />  
+                
+        )
+    }
+
   return (
     <div className="flex flex-col flex-1">
         <div className="position-sticky top-0 z-10 shadow-md py-4 w-full">
