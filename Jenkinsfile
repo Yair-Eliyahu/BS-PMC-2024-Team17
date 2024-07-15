@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pipeline {
     agent any
     // tools {
@@ -39,3 +40,37 @@ pipeline {
         }
     }
 }
+=======
+pipeline {
+    agent any
+    
+    stages{
+        stage('Install Dependencies') {
+            agent {
+                docker { image 'node:20' }
+            }
+            steps{
+                sh 'npm install'
+            }
+        }
+
+        stage('Build') {
+            agent {
+                docker { image 'node:20' }
+            }
+            steps {
+                sh 'npm run build'
+            }
+        }
+
+        stage('Tests') {
+            agent {
+                docker { image 'node:20' }
+            }
+            steps{
+                sh 'npm test'
+            }
+        }
+    }
+}
+>>>>>>> 542acf5bbf30c1b2d4a8237f60ae8b4ac68a134f
