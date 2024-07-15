@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            imag 'node:20'
+            image 'node:20'
         }
     }
     
