@@ -1,11 +1,12 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            imag 'node:20'
+        }
+    }
     
     stages{
         stage('Helo') {
-            agent {
-                docker { image 'node:20' }
-            }
             steps{
                 echo 'hello world'
             }
