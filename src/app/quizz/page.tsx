@@ -44,6 +44,7 @@ export default function Home() {
     const [score, setScore] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+    const [submitted, setSubmitted] = useState<boolean>(false);
 
 
     const handleNext = () =>{
@@ -53,6 +54,10 @@ export default function Home() {
         }
         if(currentQuestion < questions.length - 1){
             setCurrentQuestion(currentQuestion + 1);
+        }
+        else{
+            setSubmitted(true);
+            return;
         }
 
         setSelectedAnswer(null);
@@ -85,8 +90,11 @@ export default function Home() {
                 <div className="grid grid-cols-1 gap-6 mt-6">
                     {
                         questions[currentQuestion].answers.map(answer => {
+                            const variant = selectedAnswer === answer.id ? (answer.isCorrect ? "neoSuccess" : "neoDanger") : "neoOutline";
                             return(
-                                <Button key={answer.id} variant={'neoOutline'} size="xl" onClick={() => handleAnswer(answer)}>{answer.answerText}</Button>
+                                <Button key={answer.id} variant={variant} size="xl" onClick={() => handleAnswer(answer)}>
+                                    <p className="whitespace-normal">{answer.answerText}</p>
+                                </Button>
                             )
                         })
                     }
@@ -96,7 +104,7 @@ export default function Home() {
       </main>
     <footer className="footer pb-9 px-6 relative mb-0">
         <ResultCard isCorrect={isCorrect} correctAnswer={questions[currentQuestion].answers.find(answer => answer.isCorrect === true)?.answerText }/>
-        <Button variant="neo" onClick={handleNext}>{!started ? 'Start' : 'Next'}</Button>
+        <Button variant='neo' size="lg" onClick={handleNext}>{!started ? 'Start' : (currentQuestion === questions.length - 1) ? 'Submit' : 'Next'}</Button>
     </footer>
     </div>
   )
