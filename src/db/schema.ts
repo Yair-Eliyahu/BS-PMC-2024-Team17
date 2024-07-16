@@ -9,7 +9,7 @@ import {
     pgEnum,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
-import {relations } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 
 export const quizzes = pgTable("quizzes", {
     id: serial("id").primaryKey(),
@@ -18,8 +18,8 @@ export const quizzes = pgTable("quizzes", {
     userId: text("user_id"),
 });
 
-export const quizzesRelations = relations(quizzes, ({ many, one}) => ({
-
+export const quizzesRelations = relations(quizzes, ({ many }) => ({
+    questions: many(questions)
 }));
 
 export const questions = pgTable("questions", {
@@ -49,4 +49,4 @@ export const questionAnswersRelations = relations(
         fields: [questionAnswers.questionId],
         references: [questions.id]
     })
-}))
+}));
