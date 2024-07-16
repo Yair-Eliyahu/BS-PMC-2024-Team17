@@ -1,21 +1,20 @@
-FROM jenkins/jenkins:lts 
-USER root 
-RUN apt-get update 
-RUN curl -sSL https://get.docker.com/ | sh# Use an official Node.js runtime as a parent image
-FROM node:20
-
+# Use an official Node.js runtime as a parent image
+FROM node:18
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install npm globally and install dependencies
+# Install dependencies
 RUN npm install
 
 # Copy the rest of the application code
 COPY . .
+
+# Build the Next.js application
+RUN npm run build
 
 # Expose the necessary port
 EXPOSE 3000
