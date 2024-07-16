@@ -10,3 +10,5 @@ export default {
       "postgres://postgres:postgres@localhost:5432/postgres",
   },
 } satisfies Config;
+
+
