@@ -8,6 +8,7 @@ import ResultCard from "./ResultCard";
 import QuizzSubmission from "./QuizzSubmission";
 import { InferSelectModel } from "drizzle-orm";
 import { questionAnswers, questions as DbQuestions, quizzes } from "@/db/schema";
+import { useRouter } from "next/navigation";
 
 type Answer = InferSelectModel<typeof questionAnswers>
 type Question = InferSelectModel<typeof DbQuestions> & {answers: Answer[]};
@@ -21,10 +22,9 @@ export default function QuizzQuestions(props: Props) {
     const [started, setStarted] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState(0); 
     const [score, setScore] = useState(0);
-    const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-    const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+    const [userAnswers, setUserAnswers] = useState<{ questionId: number, answerId: number}[]>([]);
     const [submitted, setSubmitted] = useState<boolean>(false);
-
+    const router = useRouter();
 
     const handleNext = () =>{
         if(!started){
@@ -38,21 +38,36 @@ export default function QuizzQuestions(props: Props) {
             setSubmitted(true);
             return;
         }
-
-        setSelectedAnswer(null);
-        setIsCorrect(null);
     }
 
-    const handleAnswer = (answer: Answer) => {
-        setSelectedAnswer(answer.id);
+    const handleAnswer = (answer: Answer, questionId: number) => {
+        const newUserAnswerArr = [...userAnswers, {
+            answerId: answer.id,
+            questionId
+        }];
+        setUserAnswers(newUserAnswerArr);
         const isCurrentCorrect = answer.isCorrect;
         if(isCurrentCorrect) {
             setScore(score + 1);
         }
-        setIsCorrect(isCurrentCorrect);
+    }
+
+    const handlePressPrev = () => {
+        if (currentQuestion !== 0) {
+            setCurrentQuestion(prevCurrentQuestion =>
+                prevCurrentQuestion - 1);
+        }
+    }
+
+    const handleExit = () => {
+        router.push('dashboard');
     }
 
     const scorePercentage: number = Math.round((score / questions.length) * 100);
+    const selectedAnswer: number | null | undefined = userAnswers.find((item) =>
+        item.questionId === questions[currentQuestion].id)?.answerId;
+    const isCorrect: boolean | null | undefined = questions[currentQuestion].answers.findIndex((answer) => answer.id === selectedAnswer) ?
+    questions[currentQuestion].answers.find((answer) => answer.id === selectedAnswer)?.isCorrect : null;
 
     if(submitted) {
         return (
@@ -70,9 +85,9 @@ export default function QuizzQuestions(props: Props) {
         <div className="position-sticky top-0 z-10 shadow-md py-4 w-full">
             <header className="grid grid-cols-[auto,1fr,auto] grid-flow-col items-center justify-between py-2 gap-2">
                 
-                <Button size="icon" variant="outline"><ChevronLeft/></Button>
+                <Button size="icon" variant="outline" onClick={handlePressPrev}><ChevronLeft/></Button>
                 <ProgressBar value={(currentQuestion / questions.length) * 100} />
-                <Button size="icon" variant="outline"><X/></Button>
+                <Button size="icon" variant="outline" onClick={handleExit}><X/></Button>
 
             </header>
         </div>
@@ -85,7 +100,8 @@ export default function QuizzQuestions(props: Props) {
                         questions[currentQuestion].answers.map(answer => {
                             const variant = selectedAnswer === answer.id ? (answer.isCorrect ? "neoSuccess" : "neoDanger") : "neoOutline";
                             return(
-                                <Button key={answer.id} variant={variant} size="xl" onClick={() => handleAnswer(answer)}>
+                                <Button key={answer.id} disabled={!!selectedAnswer} variant={variant} size="xl" onClick={() => handleAnswer(answer, questions[currentQuestion].id)}
+                                className="disabled:opacity-100">
                                     <p className="whitespace-normal">{answer.answerText}</p>
                                 </Button>
                             )
