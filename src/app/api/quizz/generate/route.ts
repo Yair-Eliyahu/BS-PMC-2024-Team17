@@ -36,53 +36,13 @@ export async function POST(req: NextRequest) {
             modelName: "gpt-3.5-turbo"
         });
 
-        const parser = new JsonOutputFunctionsParser();
-        const extractionFunctionSchema = {
-            name: "extractor",
-            description: "Extracts fields from the output",
-            parameters: {
-                type: "object",
-                properties: {
-                    quizz: {
-                        type: "object",
-                        properties: {
-                            name: { type: "string" },
-                            description: { type: "string" },
-                            questions: {
-                                type: "array",
-                                items: {
-                                    type: "object",
-                                    properties: {
-                                        questionText: { type: "string" },
-                                        answers: {
-                                            type: "array",
-                                            items: {
-                                                type: "object",
-                                                properties: {
-                                                    answerText: { type: "string" },
-                                                    isCorrect: { type: "boolean" },
-                                                },
-                                            },
-                                        },
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
-            },
-        };
-
-        const runnable = model.bind({
-            functions: [extractionFunctionSchema],
-            function_call: { name: "extractor" },
-        }).pipe(parser);
+        
 
         const message = new HumanMessage({
             content: prompt + "\n" + texts.join("\n")
         });
 
-        const result = await runnable.invoke([message]);
+        const result = await model.invoke([message]);
 
         console.log(result);
 
