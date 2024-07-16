@@ -3,7 +3,7 @@ import { ChatOpenAI } from "@langchain/openai";
 import { HumanMessage } from "@langchain/core/messages";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers"; 
-
+import saveQuizz from "./saveToDb";
 
 export async function POST(req: NextRequest) {
     const body = await req.formData();
@@ -83,10 +83,11 @@ export async function POST(req: NextRequest) {
         });
 
         const result = await runnable.invoke([message]);
-
         console.log(result);
 
-        return NextResponse.json({ message: "created successfully" }, { status: 200 });
+        const { quizzId } = await saveQuizz(result.quizz);
+
+        return NextResponse.json({ quizzId}, { status: 200 });
     } catch (e: any) {
         console.error(e);
         return NextResponse.json({ error: e.message }, { status: 500 });
