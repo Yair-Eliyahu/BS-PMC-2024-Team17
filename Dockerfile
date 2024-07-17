@@ -1,4 +1,7 @@
-# Use an official Node.js runtime as a parent image
+FROM jenkins/jenkins:lts 
+USER root 
+RUN apt-get update 
+RUN curl -sSL https://get.docker.com/ | sh# Use an official Node.js runtime as a parent image
 FROM node:20
 
 
