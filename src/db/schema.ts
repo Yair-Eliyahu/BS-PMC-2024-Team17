@@ -137,7 +137,8 @@ export const questionAnswersRelations = relations(
 export const quizzSubmissions = pgTable("quizz_submissions", {
   id: serial("id").primaryKey(),
   quizzId: integer("quizz_id"),
-  score: integer("score")
+  score: integer("score"),
+  createAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const quizzSubmissionsRelations = relations(quizzSubmissions, ({ one, many }) => ({

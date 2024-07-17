@@ -14,16 +14,16 @@ const QuizzesTable = (props: Props) => {
             <table className="table-auto">
                 <thead>
                     <tr>
-                        <th className="text-[#6c7381] text-left">Name</th>
-                        <th className="text-[#6c7381] text-left">Description</th>
+                        <th className="text-[#6c7381] text-left px-4 py-2">Name</th>
+                        <th className="text-[#6c7381] text-left px-4 py-2">Description</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         props.quizzes.map((quizz: Quizz) => 
                             <tr key={quizz.id}>
-                                <td><Link href={`/quizz/${quizz.id}`}><p className="text-blue-600 underline">{quizz.name}</p></Link></td>
-                                <td>{quizz.description}</td>
+                                <td className="px-4 py-2"><Link href={`/quizz/${quizz.id}`}><p className="text-blue-600 underline">{quizz.name}</p></Link></td>
+                                <td className="px-4 py-2">{quizz.description}</td>
                             </tr>
                         )
                     }
