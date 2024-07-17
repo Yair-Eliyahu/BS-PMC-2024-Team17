@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
 
         const model = new ChatOpenAI({
             openAIApiKey: process.env.OPENAI_API_KEY,
-            modelName: "gpt-3.5-turbo"
+            modelName: "gpt-3.5-turbo-1106"
         });
 
         
