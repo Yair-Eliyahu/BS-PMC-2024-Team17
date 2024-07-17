@@ -100,8 +100,9 @@ export const quizzes = pgTable("quizzes", {
     userId: text("user_id").references(() => users.id),
 });
 
-export const quizzesRelations = relations(quizzes, ({ many }) => ({
-    questions: many(questions)
+export const quizzesRelations = relations(quizzes, ({ many, one }) => ({
+    questions: many(questions),
+    submissions: many(quizzSubmissions),
 }));
 
 export const questions = pgTable("questions", {
@@ -131,4 +132,17 @@ export const questionAnswersRelations = relations(
         fields: [questionAnswers.questionId],
         references: [questions.id]
     })
+}));
+
+export const quizzSubmissions = pgTable("quizz_submissions", {
+  id: serial("id").primaryKey(),
+  quizzId: integer("quizz_id"),
+  score: integer("score")
+});
+
+export const quizzSubmissionsRelations = relations(quizzSubmissions, ({ one, many }) => ({
+  quizz: one(quizzes, {
+    fields: [quizzSubmissions.quizzId],
+    references: [quizzes.id],
+  }),
 }));
