@@ -83,8 +83,8 @@ export async function POST(req: NextRequest) {
             content: prompt + "\n" + texts.join("\n")
         });
 
-        const result = await runnable.invoke([message]);
-        console.log(JSON.stringify(result, null, 2));
+        const result: any = await runnable.invoke([message]);
+        console.log(result);
 
         const { quizzId } = await saveQuizz(result.quizz);
 
