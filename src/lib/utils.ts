@@ -25,3 +25,5 @@ export function convertDateToString(date: Date) : string {
   const formattedDate = `${year}/${month}/${day}`;
   return formattedDate;
 }
+
+export const PRICE_ID: string = "price_1Pda01JOxUcx6jSsHcgEYBFK";

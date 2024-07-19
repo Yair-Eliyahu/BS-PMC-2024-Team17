@@ -20,7 +20,7 @@ const Header = async () => {
     const session = await auth();
 
     return (
-        <header>
+        <header className="fixed top-0 left-0 w-full z-10">
             <nav className="px-4 py-2.5">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <h1 className="text-3xl font-bold">Sami Quizzer AI</h1>

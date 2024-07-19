@@ -7,6 +7,9 @@ import getUserMetrics from "@/app/actions/getUserMetrics";
 import getHeatMapData from "@/app/actions/getHeatMapData";
 import MetricCard from "./metricCard";
 import SubmissionsHeatMap from "./heatMap";
+import SubscribeBtn from "../billing/SubscribeBtn";
+import { PRICE_ID } from "@/lib/utils";
+
 
 const page = async () => {
     const session = await auth();
@@ -23,22 +26,22 @@ const page = async () => {
     const heatMapData = await getHeatMapData();
 
     return (
-        <>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            { userData && userData?.length > 0 ?
-            <>{
-                userData?.map((metric) => <MetricCard key={metric.label} label={metric.label} value={metric.value} />)
-            }
-            </> : null
-            }
-        </div>
-        <div>
-            {
-                heatMapData ? <SubmissionsHeatMap data={heatMapData.data} /> : null
-            }
-        </div>
+        <div className="mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                { userData && userData?.length > 0 ?
+                <>{
+                    userData?.map((metric) => <MetricCard key={metric.label} label={metric.label} value={metric.value} />)
+                }
+                </> : null
+                }
+            </div>
+            <div>
+                {
+                    heatMapData ? <SubmissionsHeatMap data={heatMapData.data} /> : null
+                }
+            </div>
             <QuizzesTable quizzes = {userQuizzes} />
-        </>
+        </div>
     )
 }
 
