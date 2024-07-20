@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { questions, quizzes } from "@/db/schema";
+import { quizzes } from "@/db/schema";
 import { eq } from 'drizzle-orm';
 import QuizzQuestions from "../QuizzQuestions";
 
@@ -19,8 +19,9 @@ const page = async ({ params }: {
             }
         }
     })
+    console.log(quizz);
 
-    if(!quizzId || !quizz) {
+    if(!quizzId || !quizz || quizz.questions.length === 0) {
         return <div>Quizz not found</div>
     }
     return (

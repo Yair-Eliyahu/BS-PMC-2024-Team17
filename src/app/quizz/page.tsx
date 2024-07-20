@@ -82,7 +82,7 @@ export default function Home() {
                 score={score}
                 scorePercentage={scorePercentage}
                 totalQuestions={questions.length}
-                />  
+            />  
                 
         )
     }
