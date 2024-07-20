@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,12 +14,12 @@ export default function Home() {
           <div className="text-center flex gap-6 flex-col">
             <h1 className="text-3xl font-bold">Get quizzes about anything!</h1>
             <h3 className="text-sm">Upload documents, and easily generate quizzes with AI.</h3>
-            <Button variant="neo" className="mt-4 h-14 text-white">Get Started</Button>
+            <Link href="/quizz/new">
+              <Button variant="neo" className="mt-4 h-14 text-white">Get Started</Button>
+            </Link>
           </div>
         </div>
       </main>
     </div>
   )
 }
-
-{/* <h1 className="text-6xl font-bold">Team 17 Sami QuizzerAI👋</h1> */}
