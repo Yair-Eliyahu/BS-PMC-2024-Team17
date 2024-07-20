@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
         const model = new ChatOpenAI({
             openAIApiKey: process.env.OPENAI_API_KEY,
-            modelName: "gpt-4"
+            modelName: "gpt-4-turbo"
         });
 
         const parser = new JsonOutputFunctionsParser();
