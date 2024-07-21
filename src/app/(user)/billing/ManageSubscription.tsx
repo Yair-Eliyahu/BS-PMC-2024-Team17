@@ -33,7 +33,7 @@ const ManageSubscription = () => {
         
     }
     return (
-        <Button disabled={loading} onClick={redirectToCustomerPortal}>{loading ? 
+        <Button className="h-5 rounded-full px-5 py-5" disabled={loading} onClick={redirectToCustomerPortal}>{loading ? 
         <>
         <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please Wait
         </> :
