@@ -10,7 +10,7 @@ interface SaveQuizzData extends Quizz {
     questions: Array<Question & {answers?: Answer[]}>;
 }
 
-export default async function saveQuizz(quizzData: { name: any; description: any; questions: any; }) { // added { name:any... } cuz of redline
+export default async function saveQuizz(quizzData: SaveQuizzData) { // added { name:any... } cuz of redline
     const { name, description, questions } = quizzData;
 
     const newQuizz = await db
@@ -34,9 +34,9 @@ export default async function saveQuizz(quizzData: { name: any; description: any
             
             if(question.answers && question.answers.length > 0) {
                 await tx.insert(questionAnswers).values(
-                    question.answers.map((answer: { answerText: any; IsCorrect: any; }) => ({
+                    question.answers.map((answer) => ({
                         answerText: answer.answerText,
-                        isCorrect: answer.IsCorrect,
+                        isCorrect: answer.isCorrect,
                         questionId
                     }))
                 )
