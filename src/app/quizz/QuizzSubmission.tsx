@@ -33,7 +33,7 @@ const QuizzSubmission = (props: Props) => {
               <div className="position-sticky top-0 z-10 shadow-md py-4 w-full">
             <header className="flex items-center justify-end py-2 gap-2">
                 
-                <Button onClick={onHandleBack} size="icon" variant="outline" ><X/></Button>
+              <Button onClick={onHandleBack} size="icon" variant="outline" ><X/></Button>
 
             </header>
         </div>

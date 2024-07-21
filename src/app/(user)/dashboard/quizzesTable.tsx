@@ -22,7 +22,7 @@ const QuizzesTable = (props: Props) => {
                     {
                         props.quizzes.map((quizz: Quizz) => 
                             <tr key={quizz.id}>
-                                <td className="px-4 py-2"><Link href={`/quizz/${quizz.id}`}><p className="text-blue-600 underline">{quizz.name}</p></Link></td>
+                                <td className="px-4 py-2"><Link href={`/quizz/${quizz.id}`}><p className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 font-semibold hover:bg-gradient-to-l hover:from-red-500 hover:via-pink-500 hover:to-purple-400 transition duration-300 ease-in-out transform hover:scale-105">{quizz.name}</p></Link></td>
                                 <td className="px-4 py-2">{quizz.description}</td>
                             </tr>
                         )

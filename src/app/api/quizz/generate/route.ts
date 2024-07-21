@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
         const selectedDocuments = docs.filter((doc) => doc.pageContent !== undefined);
         const texts = selectedDocuments.map((doc) => doc.pageContent);
 
-        const prompt = `Given the text which is a summary of the document, generate a quiz based on the text. 
+        const prompt = `Given the text which is a summary of the document, generate a quiz (with at least 10 questions and 4 possible answer) based on the text, also mix the answers that they wont be at the same place for each quiz. 
         Return JSON only that contains a quiz object with fields: name, description, and questions. 
         The questions is an array of objects with fields: questionText, answers. 
         The answers is an array of objects with fields: answerText, isCorrect.`;

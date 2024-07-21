@@ -7,4 +7,4 @@ const UserPagesLayout = ({
         )
     }
 
-    export default UserPagesLayout;
+export default UserPagesLayout;
