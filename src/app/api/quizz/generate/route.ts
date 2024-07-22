@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
         const selectedDocuments = docs.filter((doc) => doc.pageContent !== undefined);
         const texts = selectedDocuments.map((doc) => doc.pageContent);
 
-        const prompt = `Given the text which is a summary of the document, generate a quiz (with at least 10 questions and 4 possible answer) based on the text, also mix the answers that they wont be at the same place for each quiz. 
+        const prompt = `Given the text which is a summary of the document, generate a quiz (with at least 10 questions and 4 possible answer) based on the text, also mix the answers that they wont be at the same place each answer should have a different placement and cannot be the same as the previous one for example if question 1 had the correct answer on the first placement, question 2 cannot have the right answer on the first placement it must me at the second third or fourth and so on. 
         Return JSON only that contains a quiz object with fields: name, description, and questions. 
         The questions is an array of objects with fields: questionText, answers. 
         The answers is an array of objects with fields: answerText, isCorrect.`;
@@ -80,8 +80,13 @@ export async function POST(req: NextRequest) {
         }).pipe(parser);
 
         const message = new HumanMessage({
-            content: prompt + "\n" + texts.join("\n")
-        });
+            content: [
+              {
+                type: "text",
+                text: prompt + "\n" + texts.join("\n"),
+              },
+            ],
+          });
 
         const result: any = await runnable.invoke([message]);
         console.log(JSON.stringify(result, null, 2));
