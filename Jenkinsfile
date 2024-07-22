@@ -11,7 +11,7 @@ pipeline {
             }
         }
 
-        stage('Build Peoject') {
+        stage('Build Project') {
             agent {
                 docker { image 'node:20' }
             }
