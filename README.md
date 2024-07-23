@@ -1,5 +1,5 @@
 The project that uses AI to generate quizzes.
-<img width="100" alt="logo" src="/BS-PMC-2024-Team17/owl-icon.png">
+<img width="100" alt="logo" src="https://github.com/Yair-Eliyahu/BS-PMC-2024-Team17/blob/GuyE/owl-icon.png">
 
 <img width="1399" alt="Screenshot 2024-01-22 at 3 34 26 PM" src="https://github.com/judygab/ai-form-builder-tutorial/assets/50160672/443a69ed-e441-412a-a84e-ea820022c6dc">
 
