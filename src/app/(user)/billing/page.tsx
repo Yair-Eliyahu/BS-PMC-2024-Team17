@@ -23,7 +23,7 @@ const page = async () => {
     const plan = user?.subscribed ? 'PREMIUM' : 'FREE';
 
     return (
-        <div className="flex justify-center items-center py-20">
+        <div className="flex justify-center items-center py-20 mt-10">
             <div className="p-8 border-2 border-gray-700 rounded-md w-full max-w-3xl text-center">
                 <h1 className="text-4xl mb-4 text-white font-bold">Subscription Details</h1>
                 <p className="mb-4 text-gray-300">You are currently on a <span className="text-green-400 font-semibold">{plan}</span> plan</p>
