@@ -20,37 +20,40 @@ const Header = async () => {
     const session = await auth();
 
     return (
-        <header>
-            <nav className="px-4 py-2.5">
-                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                    <h1 className="text-3xl font-bold">Sami Quizzer AI</h1>
-                <div>
-                {
-                    session?.user ? (
-                        <div className="flex items-center gap-4">
-                            {
-                                session.user.name && session.user.image &&
+        <header className="fixed top-0 left-0 w-full z-10 flex items-center px-4">
+            <div className="flex-shrink-0">
+                <Link href="/">
+                    <Image src="/images/owl-icon-logo.png" width={80} height={80} alt="owl" />
+                </Link>
+            </div>
+            <nav className="flex-grow flex justify-between items-center max-w-screen-xl mx-auto">
+                <h1 className="text-3xl font-bold text-white">Sami Quizzer AI</h1>
+                <div className="flex items-center gap-4 mr-2">
+                    {session?.user ? (
+                        <>
+                            {session.user.name && session.user.image && (
                                 <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <Button variant="ghost">
-                                    <Image src={session.user.image}
-                                            alt={session.user.name}
-                                            width={32}
-                                            height={32}
-                                            className="rounded-full"
+                                    <DropdownMenuTrigger asChild>
+                                        <Button variant="ghost">
+                                            <Image
+                                                src={session.user.image}
+                                                alt={session.user.name}
+                                                width={32}
+                                                height={32}
+                                                className="rounded-full"
                                             />
-                                    </Button>
-                                </DropdownMenuTrigger>
-                                <NavMenu />
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <NavMenu />
                                 </DropdownMenu>
-                            }
+                            )}
                             <SignOut />
-                        </div>
+                        </>
                     ) : (
-                        <Link href="../api/auth/signin"><Button variant="link" className="rounded-xl border">Sign In</Button></Link>
-                    )
-                }
-                </div>
+                        <Link href="../api/auth/signin">
+                            <Button variant="link" className="rounded-xl border">Sign In</Button>
+                        </Link>
+                    )}
                 </div>
             </nav>
         </header>

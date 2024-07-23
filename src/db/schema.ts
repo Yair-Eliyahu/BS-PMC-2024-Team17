@@ -14,12 +14,15 @@ import type { AdapterAccountType } from "next-auth/adapters"
 
 export const users = pgTable("user", {
     id: text("id")
+      .notNull() //added
       .primaryKey()
       .$defaultFn(() => crypto.randomUUID()),
     name: text("name"),
     email: text("email").notNull(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
+    stripeCustomerID: text("stripe_customer_id"),
+    subscribed: boolean("subscribed"),
   })
 
   export const usersRelations = relations(users, ({ many }) => ({
@@ -51,7 +54,7 @@ export const users = pgTable("user", {
   )
    
   export const sessions = pgTable("session", {
-    sessionToken: text("sessionToken").primaryKey(),
+    sessionToken: text("sessionToken").notNull().primaryKey(), // added notnull
     userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),

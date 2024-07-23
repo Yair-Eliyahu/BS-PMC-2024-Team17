@@ -33,11 +33,11 @@ const QuizzSubmission = (props: Props) => {
               <div className="position-sticky top-0 z-10 shadow-md py-4 w-full">
             <header className="flex items-center justify-end py-2 gap-2">
                 
-                <Button onClick={onHandleBack} size="icon" variant="outline" ><X/></Button>
+              <Button onClick={onHandleBack} size="icon" variant="outline" ><X/></Button>
 
             </header>
         </div>
-      <main className="py-11 flex flex-col gap-4 items-center flex-1 mt-24">
+      <main className="py-11 flex flex-col gap-4 items-center flex-1">
         <h2 className="text-3xl font-bold">Quizz Complete!</h2>
         <p>You scored: {scorePercentage}%</p>
         {scorePercentage === 100 ? 

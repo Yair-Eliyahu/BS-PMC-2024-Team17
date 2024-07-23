@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 type Props = {
     isCorrect: boolean | null | undefined,
-    correctAnswer: string
+    correctAnswer: string // added the undefined cuz of red line in src/app/quizz/page.tsx
 }
 
 const ResultCard = (props: Props) => {

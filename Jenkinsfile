@@ -11,7 +11,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Project') {
             agent {
                 docker { image 'node:20' }
             }
@@ -20,13 +20,28 @@ pipeline {
             }
         }
 
-        stage('Tests') {
+        stage('Run Tests') {
             agent {
                 docker { image 'node:20' }
             }
             steps{
                 sh 'npm test'
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up...'
+            cleanWs()
+        }
+        success {
+            echo 'Pipeline succeeded!'
+            // Add notifications here if needed
+        }
+        failure {
+            echo 'Pipeline failed!'
+            // Add notifications here if needed
         }
     }
 }
