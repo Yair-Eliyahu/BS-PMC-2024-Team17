@@ -24,6 +24,7 @@ export default function RootLayout({
           {children}
           </body>
       </SessionProvider>
+      
     </html>
   )
 }
