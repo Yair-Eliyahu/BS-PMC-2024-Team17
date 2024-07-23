@@ -4,7 +4,6 @@ import './globals.css'
 import {SessionProvider} from "next-auth/react";
 import Header from '@/components/ui/header';
 
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
