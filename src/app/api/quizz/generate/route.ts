@@ -4,6 +4,8 @@ import { HumanMessage } from "@langchain/core/messages";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 import saveQuizz from "./saveToDb";
+import { Session } from "inspector";
+import { auth } from "@/auth";
 
 
 export async function POST(req: NextRequest) {
@@ -90,8 +92,13 @@ export async function POST(req: NextRequest) {
 
         const result: any = await runnable.invoke([message]);
         console.log(JSON.stringify(result, null, 2));
-
-        const { quizzId } = await saveQuizz(result.quizz);
+        
+        const session = await auth();
+        if (!session || !session.user) {
+            return NextResponse.json({ error: "User is not authenticated" }, { status: 401 });
+        }
+        const userId:any = session.user.id;
+        const { quizzId } = await saveQuizz(result.quizz, userId);
 
         return NextResponse.json(
             { quizzId }, 
