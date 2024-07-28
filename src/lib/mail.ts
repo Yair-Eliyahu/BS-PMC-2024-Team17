@@ -22,6 +22,9 @@ export async function sendMail({
             user: SMTP_EMAIL,
             pass: SMTP_PASSWORD,
         },
+        tls: {
+            rejectUnauthorized: false
+        }
     });
 
     try {
