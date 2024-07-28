@@ -67,7 +67,7 @@ export function NavMenu() {
 
       <DropdownMenuGroup>
         <DropdownMenuItem className="mb-2">
-          <Link href="/invite-users" className="flex flex-row items-center">
+          <Link href="/Invite/" className="flex flex-row items-center">
             <UserPlus className="mr-2 h-4 w-4" />
             <span>Invite Users</span>
           </Link>
