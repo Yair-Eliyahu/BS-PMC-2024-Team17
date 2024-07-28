@@ -1,9 +1,12 @@
+
+
 import { auth, signOut } from "@/auth";
 import { Button } from './button';
 import Image from "next/image";
 import Link from "next/link";
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { NavMenu } from "@/components/NavMenu";
+import SwitchMode from "@/components/switchMode";
 
 function SignOut() {
     return (
@@ -28,6 +31,8 @@ const Header = async () => {
             </div>
             <nav className="flex-grow flex justify-between items-center max-w-screen-xl mx-auto">
                 <h1 className="text-3xl font-bold text-white">Sami Quizzer AI</h1>
+            
+                
                 <div className="flex items-center gap-4 mr-2">
                     {session?.user ? (
                         <>
@@ -54,6 +59,7 @@ const Header = async () => {
                             <Button variant="link" className="rounded-xl border">Sign In</Button>
                         </Link>
                     )}
+                    <SwitchMode /> 
                 </div>
             </nav>
         </header>

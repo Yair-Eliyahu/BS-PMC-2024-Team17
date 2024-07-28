@@ -17,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <SessionProvider>
-        <body className={"dark"}>
+        <body className={inter.className}>
           <Header />
           {children}
           </body>
