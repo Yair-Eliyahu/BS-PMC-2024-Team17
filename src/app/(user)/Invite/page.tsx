@@ -46,15 +46,15 @@ export default function Page() {
     };
 
     return (
-        <div className="text-white flex min-h-screen flex-col items-center justify-center p-24 gap-4">
-            <h1 className="text-4xl mb-4 text-white font-bold">Send an Invite Email</h1>
-            <form onSubmit={handleSubmit} className="text-black flex flex-col gap-4 border-2 border-gray-700 rounded-md p-20">
+        <div className="text-white flex min-h-screen flex-col items-center justify-center p-6 gap-6">
+            <h1 className="text-4xl mb-4 text-white font-bold">Send an Email Invite</h1>
+            <form onSubmit={handleSubmit} className="text-black flex flex-col gap-4 border-2 border-gray-700 rounded-lg p-20">
                 <input
                     type="text"
                     name="name"
                     placeholder="Name"
                     required
-                    className="p-2 border border-gray-300 rounded"
+                    className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={formData.name}
                     onChange={handleChange}
                 />
@@ -63,25 +63,30 @@ export default function Page() {
                     name="email"
                     placeholder="Email"
                     required
-                    className="p-2 border border-gray-300 rounded"
+                    className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={formData.email}
                     onChange={handleChange}
                 />
-                <div className="flex flex-row items-center justify-center">
-                    <button type="submit" className="bg-white p-3 rounded-full text-black flex flex-row items-center justify-center gap-2" disabled={loading}>
-                        {loading ? 
+                <div className="flex flex-row items-center justify-center mt-4">
+                    <button
+                        type="submit"
+                        className="bg-blue-600 p-3 rounded-full text-white flex flex-row items-center justify-center gap-2 hover:bg-blue-700 disabled:bg-gray-400"
+                        disabled={loading}
+                    >
+                        {loading ? (
                             <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please Wait
-                            </> : 
+                            </>
+                        ) : (
                             <>
                                 <Send />
                                 <p>Send</p>
                             </>
-                        }
+                        )}
                     </button>
                 </div>
             </form>
-            {message && <p>{message}</p>}
+            {message && <p className="mt-4 text-center text-green-400">{message}</p>}
             {showAnimation && (
                 <motion.div
                     initial={{ opacity: 0, scale: 0.5 }}
@@ -93,5 +98,6 @@ export default function Page() {
                 </motion.div>
             )}
         </div>
+
     );
 }
