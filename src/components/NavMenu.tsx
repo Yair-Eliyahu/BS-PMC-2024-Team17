@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { BarChartBig, CreditCard, LifeBuoy, Settings, User, UserPlus, Plus, Github} from "lucide-react"
+import { BarChartBig, CreditCard, LifeBuoy, Settings, User, UserPlus, Plus, Github, Calendar} from "lucide-react"
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
@@ -45,6 +45,13 @@ export function NavMenu() {
           <Link href="/billing" className="flex flex-row items-center">
             <CreditCard className="mr-2 h-4 w-4" />
             <span>Billing</span>
+          </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem className="mb-2">
+          <Link href="/calendar" className="flex flex-row items-center">
+            <Calendar className="mr-2 h-4 w-4" />
+            <span>Calendar</span>
           </Link>
         </DropdownMenuItem>
 
