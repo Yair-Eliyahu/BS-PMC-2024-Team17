@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { BarChartBig, CreditCard, LifeBuoy, Settings, User, UserPlus, Plus, Github} from "lucide-react"
+import SwitchMode from "@/components/switchMode";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
@@ -57,12 +58,6 @@ export function NavMenu() {
 
       <DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="mb-2">
-          <Link href="https://github.com/Yair-Eliyahu/BS-PMC-2024-Team17.git" className="flex flex-row items-center">
-          <Github className="mr-2 h-4 w-4" />
-          <span>GitHub</span>
-          </Link>
-        </DropdownMenuItem>
       </DropdownMenuGroup>
 
       <DropdownMenuGroup>
@@ -76,10 +71,7 @@ export function NavMenu() {
       </DropdownMenuGroup>
 
       <DropdownMenuItem className="mb-2">
-          <Link href="/settings" className="flex flex-row items-center">
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
-          </Link>
+             <SwitchMode />
         </DropdownMenuItem>
       </DropdownMenuGroup>
 
@@ -91,10 +83,7 @@ export function NavMenu() {
           </Link>
         </DropdownMenuItem>
       </DropdownMenuGroup>
-
       
-
-
     </DropdownMenuContent>
   )
 }
