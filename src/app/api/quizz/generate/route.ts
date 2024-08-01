@@ -6,6 +6,7 @@ import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 import saveQuizz from "./saveToDb";
 import { Session } from "inspector";
 import { auth } from "@/auth";
+import { getUser } from "@/auth/server";
 
 
 export async function POST(req: NextRequest) {
@@ -94,15 +95,29 @@ export async function POST(req: NextRequest) {
         console.log(JSON.stringify(result, null, 2));
         
         const session = await auth();
-        if (!session || !session.user) {
-            return NextResponse.json({ error: "User is not authenticated" }, { status: 401 });
+        const regsession = await getUser();
+        if(session) {
+            if (!session || !session.user) {
+                return NextResponse.json({ error: "User is not authenticated" }, { status: 401 });
+            }
+            const userId:any = session.user.id;
+            const { quizzId } = await saveQuizz(result.quizz, userId);
+    
+            return NextResponse.json(
+                { quizzId }, 
+                { status: 200 });
+        } else if(regsession) {
+            if (!regsession) {
+                return NextResponse.json({ error: "User is not authenticated" }, { status: 401 });
+            }
+            const regUserId:any = regsession.id;
+            const { quizzId } = await saveQuizz(result.quizz, regUserId);
+    
+            return NextResponse.json(
+                { quizzId }, 
+                { status: 200 });
         }
-        const userId:any = session.user.id;
-        const { quizzId } = await saveQuizz(result.quizz, userId);
 
-        return NextResponse.json(
-            { quizzId }, 
-            { status: 200 });
     } catch (e: any) {
         console.error(e);
         return NextResponse.json({ error: e.message }, { status: 500 });
