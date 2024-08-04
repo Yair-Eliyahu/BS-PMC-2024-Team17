@@ -24,7 +24,7 @@ export async function sendMail({
         },
         tls: {
             rejectUnauthorized: false
-        },
+        }
     });
 
     try {
