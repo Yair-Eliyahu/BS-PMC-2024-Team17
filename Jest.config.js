@@ -13,8 +13,17 @@ const config = {
     testEnvironment: 'jest-environment-jsdom',
     preset: 'ts-jest',
     moduleNameMapper: {
-        '^@/(.*)$': '<rootDir>/$1', // Adjust this if your root directory is different
+        '^@/(.*)$': '<rootDir>/src/$1',
       },
+      moduleDirectories: ['node_modules', 'src'],
+      transform: {
+        '^.+\\.tsx?$': 'ts-jest', // Transform TypeScript files
+        '^.+\\.jsx?$': 'babel-jest', // Transform JavaScript files
+      },
+      moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+      transformIgnorePatterns: [
+        '/node_modules/(?!next-auth).+\\.(js|jsx|ts|tsx)$', // Transform specific node modules
+      ],
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
