@@ -12,16 +12,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { BarChartBig, CreditCard, LifeBuoy, Settings, User, UserPlus, Plus, Github} from "lucide-react"
+import { BarChartBig, CreditCard, LifeBuoy, User, UserPlus, Plus, Calendar} from "lucide-react"
 import SwitchMode from "@/components/switchMode";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
+
+type NavMenuProps = {
+  session: any; // Replace with the appropriate type
+  regsession: any; // Replace with the appropriate type
+};
 
 export function NavMenu() {
   const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
   const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
   const [showPanel, setShowPanel] = React.useState<Checked>(false)
-
+  
   return (
     <DropdownMenuContent className="w-56">
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -34,6 +39,13 @@ export function NavMenu() {
             <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
+        
+          <DropdownMenuItem className="mb-2">
+            <Link href="/calendar" className="flex flex-row items-center">
+              <Calendar className="mr-2 h-4 w-4" />
+              <span>Calendar</span>
+            </Link>
+          </DropdownMenuItem>
 
         <DropdownMenuItem className="mb-2">
           <Link href="/profile" className="flex flex-row items-center">

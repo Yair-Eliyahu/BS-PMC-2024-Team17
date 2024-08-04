@@ -6,6 +6,7 @@ import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu
 import { NavMenu } from "@/components/NavMenu";
 import { getUser } from "@/auth/server";
 import SignOutButton from "../SignOutButton";
+import { getUserRole } from "@/app/actions/userSchoolRole";
 
 function SignOut() {
     return (
@@ -21,6 +22,13 @@ function SignOut() {
 const Header = async () => {
     const session = await auth();
     const regsession = await getUser();
+
+    const userId = session?.user?.id;
+    const regUserId = regsession?.id;
+    const schoolRole = getUserRole({
+      userId,
+      regUserId
+    });
 
     return (
         <header className="fixed top-0 left-0 w-full z-10 flex items-center px-4">
