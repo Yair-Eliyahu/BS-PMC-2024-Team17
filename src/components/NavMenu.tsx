@@ -49,13 +49,6 @@ export function NavMenu() {
         </DropdownMenuItem>
 
         <DropdownMenuItem className="mb-2">
-          <Link href="/calendar" className="flex flex-row items-center">
-            <Calendar className="mr-2 h-4 w-4" />
-            <span>Calendar</span>
-          </Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem className="mb-2">
           <Link href="/quizz/new" className="flex flex-row items-center">
             <Plus className="mr-2 h-4 w-4" />
             <span>New Quizz</span>
