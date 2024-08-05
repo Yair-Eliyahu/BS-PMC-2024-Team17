@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import React from 'react';
 import Tooltip from '@uiw/react-tooltip';
 import HeatMap from '@uiw/react-heat-map';
@@ -40,7 +41,7 @@ const SubmissionsHeatMap = (props: Props) => {
                     <rect {...props} />
                 </Tooltip>
             )}
-        />
+            data-testid="heat-map"/>
     );
 };
 
