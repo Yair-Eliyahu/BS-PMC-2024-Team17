@@ -57,7 +57,11 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/plugin-syntax-jsx": "^7.24.7",
     "@babel/plugin-transform-runtime": "^7.24.7",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
     "@testing-library/dom": "^10.3.1",
     "@testing-library/jest-dom": "^5.17.0",
