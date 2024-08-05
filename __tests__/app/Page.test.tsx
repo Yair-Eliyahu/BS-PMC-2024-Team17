@@ -2,13 +2,13 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Page from '@/app/(user)/Invite/page';
 import { jest } from '@jest/globals';
 
-// Mock fetch function
-global.fetch = jest.fn(() =>
-    Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({}), // Mock the json method if it's used
-    })
-) as jest.Mock;
+// // Mock fetch function
+// global.fetch = jest.fn(() =>
+//     Promise.resolve({
+//         ok: true,
+//         json: () => Promise.resolve({}), // Mock the json method if it's used
+//     })
+// ) as jest.Mock;
 
 describe('Page Component', () => {
     beforeEach(() => {
