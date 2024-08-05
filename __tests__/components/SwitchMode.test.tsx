@@ -1,5 +1,3 @@
-// __tests__/components/SwitchMode.test.tsx
-
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import SwitchMode from "@/components/switchMode"; // Adjust the import path as necessary
 

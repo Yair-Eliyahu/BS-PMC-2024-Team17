@@ -30,16 +30,15 @@ export default function Page() {
                 body: JSON.stringify(formData),
             });
             if (response.ok) {
-                console.log('Email sent successfully');
                 setShowAnimation(true);
                 setFormData({ name: '', email: '' }); // Clear the fields
-                setTimeout(() => setShowAnimation(false), 5000); // Hide animation after 3 seconds
-                console.log('Email sent successfully');
+                setTimeout(() => setShowAnimation(false), 5000); // Hide animation after 5 seconds
+                setMessage('🎉 Email Sent Successfully!');
             } else {
-                console.log('Failed to send email');
+                setMessage('Failed to send email');
             }
         } catch (error) {
-            console.log('Failed to send email');
+            setMessage('Failed to send email');
         } finally {
             setLoading(false);
         }
@@ -94,10 +93,9 @@ export default function Page() {
                     exit={{ opacity: 0, scale: 0.5 }}
                     className="top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white p-4 rounded-lg shadow-lg"
                 >
-                    <p>🎉 Email Sent Successfully!</p>
+                    <p>{message}</p>
                 </motion.div>
             )}
         </div>
-
     );
 }
