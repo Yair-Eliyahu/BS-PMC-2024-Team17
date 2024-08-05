@@ -10,8 +10,7 @@ const relevantEvents = new Set([
 ]);
 
 export async function POST(
-    req: Request
-) {
+req: Request, p0: any) {
     const body = await req.text();
     const sig = req.headers.get(
         "stripe-signature"

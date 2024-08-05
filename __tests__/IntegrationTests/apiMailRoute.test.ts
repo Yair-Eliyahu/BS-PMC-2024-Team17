@@ -1,4 +1,3 @@
-// __tests__/IntegrationTests/mail_route.test.ts
 import { sendMail } from '@/lib/mail';
 import { POST } from '../../src/app/api/mail/route';
 import { MockNextResponse } from '__mocks__/next';
