@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect'; // for better assertions
-import Bar from '@/components/Bar'; // Update this path based on your actual file structure
+import '@testing-library/jest-dom/extend-expect';
+import Bar from '@/components/Bar';
 
 describe('Bar Component', () => {
 

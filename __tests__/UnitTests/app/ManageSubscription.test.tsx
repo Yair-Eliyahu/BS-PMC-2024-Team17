@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ManageSubscription from '@/app/(user)/billing/ManageSubscription';  // Adjust the import path as needed
+import ManageSubscription from '@/app/(user)/billing/ManageSubscription';
 import { useRouter } from 'next/navigation';
 
 // Mock the useRouter hook from next/navigation

@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import SwitchMode from "@/components/switchMode"; // Adjust the import path as necessary
+import SwitchMode from "@/components/switchMode";
 
 // Mock localStorage and document.documentElement classList
 beforeAll(() => {

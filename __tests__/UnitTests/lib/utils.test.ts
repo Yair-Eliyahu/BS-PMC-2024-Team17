@@ -1,5 +1,3 @@
-// __tests__/lib/utils.test.ts
-
 import { cn, roundIfNumber, convertDateToString, getErrorMessage, PRICE_ID } from '@/lib/utils';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -53,7 +51,7 @@ describe('Utils functions', () => {
   describe('convertDateToString', () => {
     it('should convert a date to a formatted string', () => {
       const date = new Date('2023-08-05T00:00:00Z');
-      expect(convertDateToString(date)).toBe('2023/8/6'); // Note: getDay() returns the day of the week, not the day of the month
+      expect(convertDateToString(date)).toBe('2023/8/6');
     });
   });
 

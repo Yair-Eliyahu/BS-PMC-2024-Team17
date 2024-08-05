@@ -1,9 +1,7 @@
-// SubmissionsHeatMap.test.tsx
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import SubmissionsHeatMap from '@/app/(user)/dashboard/heatMap';
-import { convertDateToString } from '@/lib/utils';
 
 jest.mock('@/lib/utils', () => ({
     convertDateToString: jest.fn((date: Date) => date.toISOString().split('T')[0])
