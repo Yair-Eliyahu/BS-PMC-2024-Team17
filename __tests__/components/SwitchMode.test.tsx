@@ -24,7 +24,7 @@ beforeAll(() => {
 describe('SwitchMode Component', () => {
   test('renders with correct initial mode', () => {
     // Mock localStorage to return 'dark' or 'light' mode
-    (localStorage.getItem as jest.Mock).mockReturnValue('dark');
+    (localStorage.getItem as jest.Mock).mockReturnValue('dark'),
 
     // Mock classList.contains to return true if 'dark' is checked
     (document.documentElement.classList.contains as jest.Mock).mockImplementation(className => className === 'dark');
