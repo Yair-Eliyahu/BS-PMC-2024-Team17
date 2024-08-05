@@ -1,4 +1,5 @@
-// SubmissionsHeatMap.tsx
+"use client"
+
 import React from 'react';
 import Tooltip from '@uiw/react-tooltip';
 import HeatMap from '@uiw/react-heat-map';

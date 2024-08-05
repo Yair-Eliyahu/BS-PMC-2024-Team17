@@ -13,7 +13,7 @@ export async function getUserRole({
     const idToQuery = userId || regUserId;
 
     if (!idToQuery) {
-        throw new Error("Neither userId nor regUserId provided");
+        return;
     }
 
     const user = await db.query.users.findFirst({
