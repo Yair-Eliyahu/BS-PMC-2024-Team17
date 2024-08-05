@@ -40,7 +40,7 @@ const SubmissionsHeatMap = (props: Props) => {
                     <rect {...props} />
                 </Tooltip>
             )}
-        />
+            data-testid="heat-map"/>
     );
 };
 
