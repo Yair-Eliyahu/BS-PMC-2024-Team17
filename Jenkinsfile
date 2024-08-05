@@ -28,6 +28,15 @@ pipeline {
                 sh 'npm test'
             }
         }
+
+        stage('Run Tests Coverage') {
+            agent {
+                docker { image 'node:20' }
+            }
+            steps{
+                sh 'npm test -- --coverage'
+            }
+        }
     }
 
     post {
