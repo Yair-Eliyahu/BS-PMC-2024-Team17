@@ -11,10 +11,7 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths || {}, { prefix: '<rootDir>/' }),
-  transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest', // Use babel-jest for transforming JavaScript and TypeScript files
-  },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  preset: 'ts-jest',
 };
 
 module.exports = createJestConfig(customJestConfig);
