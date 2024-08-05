@@ -84,7 +84,7 @@ function LoginPage() {
             </Button>
           </Link>
           <div className="mt-4">
-            Don't have an account?{" "}
+            Dont have an account?{" "}
             <Link href="/create-account" className="underline text-black">
               Create Account
             </Link>

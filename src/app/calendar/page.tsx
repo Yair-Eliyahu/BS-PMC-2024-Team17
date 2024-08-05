@@ -13,7 +13,7 @@ const Calendar = () => {
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    const daysArray = [];
+    const daysArray:any = [];
     for (let i = 0; i < firstDayOfMonth; i++) {
       daysArray.push("");
     }
