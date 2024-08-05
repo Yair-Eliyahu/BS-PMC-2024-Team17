@@ -1,7 +1,7 @@
 "use server";
 
 import { createSupabaseClient, protectRoute } from "@/auth/server";
-import { getErrorMessage } from "@/lib/utils"; 
+import { getErrorMessage } from "@/lib/utils";
 import { db } from "@/db"; // Import your db instance
 import { users } from "@/db/schema"; // Import your schema for the user table
 
@@ -22,17 +22,22 @@ export const createAccountAction = async (formData: FormData) => {
 
     // Check if user data exists
     if (!data.user) {
-      throw new Error('User data is not available.');
+      throw new Error("User data is not available.");
     }
 
     // Extract user information
     const { id, email: userEmail } = data.user;
 
+    // Type guard to ensure `id` is a string
+    if (typeof id !== "string") {
+      throw new Error("Invalid user ID type.");
+    }
+
     // Insert the new user into your custom 'user' table
     await db.insert(users).values({
-      id,        // Use the ID from Supabase auth
-      email: userEmail,
-      // Add other fields as necessary, e.g., `name`, `image`, etc.
+      id: id as string, // Explicit type assertion to string
+      email: userEmail as string,
+      // Add other fields as necessary, e.g., name, image, etc.
     });
 
     return { errorMessage: null };
