@@ -7,6 +7,7 @@ import { NavMenu } from "@/components/NavMenu";
 import { getUser } from "@/auth/server";
 import SignOutButton from "../SignOutButton";
 import { getUserRole } from "@/app/actions/userSchoolRole";
+import { Menu } from "lucide-react";
 
 function SignOut() {
     return (
@@ -14,7 +15,7 @@ function SignOut() {
             'use server';
             await signOut();
         }}>
-            <Button type="submit" variant="ghost">Sign Out</Button>
+            <Button type="submit" variant="ghost" className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md">Sign Out</Button>
         </form>
     );
 }
@@ -39,37 +40,46 @@ const Header = async () => {
             </div>
             <nav className="flex-grow flex justify-between items-center max-w-screen-xl mx-auto">
                 <h1 className="text-3xl font-bold text-white">Sami Quizzer AI</h1>
-
                 <div className="flex-grow flex justify-end items-center">
                     {regsession ? (
-                        <div className="flex flex-row items-center gap-2 mt-0 text-sm">
+                        <div className="flex flex-row items-center gap-5 mt-0 text-sm">
                             <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="ghost">
-                                            <p className="text-white">{regsession.email}</p>
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <NavMenu />
-                                </DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant="ghost" className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md">
+                                        <Menu className="w-5 h-5" />
+                                        <p className="ml-2">Menu</p>
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <NavMenu />
+                            </DropdownMenu>
                             <SignOutButton />
                         </div>
                     ) : session?.user ? (
                         <div className="flex items-center gap-4">
+                            
                             {session.user.name && session.user.image && (
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="ghost">
-                                            <Image
-                                                src={session.user.image}
-                                                alt={session.user.name}
-                                                width={32}
-                                                height={32}
-                                                className="rounded-full"
-                                            />
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <NavMenu />
-                                </DropdownMenu>
+                                <>  
+                                    <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+
+                                                <Button variant="ghost" className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md">
+                                                    <Menu className="w-5 h-5" />
+                                                    <p className="ml-2">Menu</p>
+                                                </Button>
+
+
+                                            </DropdownMenuTrigger>
+                                            <NavMenu />
+                                    </DropdownMenu>
+
+                                    <Image
+                                        src={session.user.image}
+                                        alt={session.user.name}
+                                        width={32}
+                                        height={32}
+                                        className="rounded-full" />
+                                    
+                                </>
                             )}
                             <SignOut />
                         </div>
