@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-        stage('Run Tests (Unit + Integration)') {
+        stage('Run Tests    (Unit + Integration)') {
             agent {
                 docker { image 'node:20' }
             }
