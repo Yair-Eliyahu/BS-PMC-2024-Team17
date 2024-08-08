@@ -5,6 +5,7 @@ import { auth } from '@/auth';
 import { getUserSubscriptionId } from '@/app/actions/userSubscription'; 
 import { redirect } from 'next/navigation';
 import { getUser } from '@/auth/server';
+import Image from "next/image";
 
 const SuccessPage = async () => {
     try {
@@ -36,16 +37,19 @@ const SuccessPage = async () => {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen">
-            <Alert variant="default">
-                <AlertTitle className="mb-3 text-xl text-green-400">Success</AlertTitle>
-                <AlertDescription>
-                    Your account has been upgraded.
-                    <br />
-                    <Link href="/dashboard" className="underline">Go to dashboard </Link> 
-                    to generate more quizzes.
-                </AlertDescription>
-            </Alert>
+        <div className="flex flex-col items-center justify-center min-h-screen">
+            <Image className="mb-4" src="/images/payment-successfull.png" width="150" height="150" alt="payment-success" />
+            <div>
+                <Alert variant="default">
+                    <AlertTitle className="mb-3 text-3xl text-green-400">Success</AlertTitle>
+                    <AlertDescription className="text-xl">
+                        Your account has been upgraded.
+                        <br />
+                        <Link href="/dashboard" className="underline">Go to dashboard </Link> 
+                        to generate more quizzes.
+                    </AlertDescription>
+                </Alert>
+            </div>
         </div>
     );
 };
