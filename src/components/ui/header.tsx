@@ -7,6 +7,7 @@ import { NavMenu } from "@/components/NavMenu";
 import { getUser } from "@/auth/server";
 import SignOutButton from "../SignOutButton";
 import { getUserRole } from "@/app/actions/userSchoolRole";
+import { LogOut } from 'lucide-react';
 
 function SignOut() {
     return (
@@ -14,7 +15,10 @@ function SignOut() {
             'use server';
             await signOut();
         }}>
-            <Button type="submit" variant="ghost">Sign Out</Button>
+            <Button type="submit" variant="ghost">
+            <LogOut className="mr-2 h-4 w-4" />
+                Sign Out
+            </Button>
         </form>
     );
 }

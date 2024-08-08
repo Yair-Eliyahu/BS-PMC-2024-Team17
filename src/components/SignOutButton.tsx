@@ -1,7 +1,7 @@
 "use client";
 
 import { signOutAction } from "@/app/actions/users"; 
-import { Loader2 } from "lucide-react";
+import { Loader2, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
@@ -26,10 +26,17 @@ function SignOutButton() {
   return (
     <button
       onClick={handleClickSignOutButton}
-      className="rounded-md p-1 text-white bg-transparent borderer text-sm flex items-center justify-center mr-2"
+      className="rounded-md p-1 text-white bg-transparent text-sm flex items-center justify-center mr-2"
       disabled={isPending}
     >
-      {isPending ? <Loader2 className="animate-spin w-4 h-4" /> : "Sign Out"}
+      {isPending ? (
+        <Loader2 className="animate-spin w-4 h-4" />
+      ) : (
+        <>
+          <LogOut className="mr-2 w-4 h-4" />
+          Sign Out
+        </>
+      )}
     </button>
   );
 }
