@@ -64,7 +64,7 @@ export default function QuizzQuestions(props: Props) {
 
     setSubmitted(true);
     if (score >= questions.length / 2) {
-      toast.success("Congratulations! You did very good !");
+      toast.success("Congratulations! You did very well!");
     } else {
       toast.error("Better luck next time. Try again!");
     }
@@ -98,7 +98,10 @@ export default function QuizzQuestions(props: Props) {
           <div className="position-sticky top-0 z-10 shadow-md py-4 w-full">
             <header className="grid grid-cols-[auto,1fr,auto] grid-flow-col items-center justify-between py-2 gap-2">
               <Button size="icon" variant="outline" onClick={handlePressPrev}><ChevronLeft /></Button>
-              <ProgressBar value={(currentQuestion / questions.length) * 100} totalQuestions={questions.length}/>
+              <ProgressBar 
+                value={(currentQuestion / questions.length) * 100} 
+                totalQuestions={questions.length} 
+              />
               <Button size="icon" variant="outline" onClick={handleExit}>
                 <X />
               </Button>
@@ -109,27 +112,30 @@ export default function QuizzQuestions(props: Props) {
               <div>
                 <h2 className="text-3xl font-bold">{questions[currentQuestion].questionText}</h2>
                 <div className="grid grid-cols-1 gap-6 mt-6">
-                  {
-                    questions[currentQuestion].answers.map(answer => {
-                      const variant = selectedAnswer === answer.id ? (answer.isCorrect ? "neoSuccess" : "neoDanger") : "neoOutline";
-                      return (
-                        <Button key={answer.id} disabled={!!selectedAnswer} variant={variant} size="xl" onClick={() => handleAnswer(answer, questions[currentQuestion].id)} className="disabled:opacity-100"><p className="whitespace-normal">{answer.answerText}</p></Button>
-                      )
-                    })
-                  }
+                  {questions[currentQuestion].answers.map(answer => {
+                    const variant = selectedAnswer === answer.id ? (answer.isCorrect ? "neoSuccess" : "neoDanger") : "neoOutline";
+                    return (
+                      <Button key={answer.id} disabled={!!selectedAnswer} variant={variant} size="xl" onClick={() => handleAnswer(answer, questions[currentQuestion].id)} className="disabled:opacity-100">
+                        <p className="whitespace-normal">{answer.answerText}</p>
+                      </Button>
+                    );
+                  })}
                 </div>
               </div>
             )}
           </main>
           <footer className="footer pb-9 px-6 relative mb-0">
             <ResultCard isCorrect={isCorrect} correctAnswer={questions[currentQuestion].answers.find(answer => answer.isCorrect === true)?.answerText || ""} />
-            {
-              (currentQuestion === questions.length - 1) ? <Button variant="neo" size="lg" onClick={handleSubmit}>Submit</Button> :
-                <Button variant="neo" size="lg" onClick={handleNext}>{!started ? 'Start' : 'Next'}</Button>
-            }
+            {currentQuestion === questions.length - 1 ? (
+              <Button variant="neo" size="lg" onClick={handleSubmit}>Submit</Button>
+            ) : (
+              <Button variant="neo" size="lg" onClick={handleNext}>
+                {!started ? 'Start' : 'Next'}
+              </Button>
+            )}
           </footer>
         </>
       )}
     </div>
-  )
+  );
 }
