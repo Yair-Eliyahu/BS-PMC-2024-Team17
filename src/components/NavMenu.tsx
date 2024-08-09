@@ -83,7 +83,7 @@ export function NavMenu() {
       </DropdownMenuGroup>
 
       <DropdownMenuItem className="mb-2">
-             <SwitchMode />
+             <SwitchMode className="mr-2 h-4 w-4"/>
         </DropdownMenuItem>
       </DropdownMenuGroup>
 
