@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import ProgressBar from "@/components/progressBar";
 import { ChevronLeft, X } from "lucide-react";
@@ -9,6 +9,8 @@ import { InferSelectModel } from "drizzle-orm";
 import { questionAnswers, questions as DbQuestions, quizzes } from "@/db/schema";
 import { saveSubmission } from "@/actions/saveSubmissions";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 type Answer = InferSelectModel<typeof questionAnswers>;
 type Question = InferSelectModel<typeof DbQuestions> & { answers: Answer[] };
@@ -61,6 +63,11 @@ export default function QuizzQuestions(props: Props) {
     }
 
     setSubmitted(true);
+    if (score >= questions.length / 2) {
+      toast.success("Congratulations! You did very good !");
+    } else {
+      toast.error("Better luck next time. Try again!");
+    }
   }
 
   const handlePressPrev = () => {
@@ -77,54 +84,52 @@ export default function QuizzQuestions(props: Props) {
   const selectedAnswer: number | null | undefined = userAnswers.find((item) => item.questionId === questions[currentQuestion].id)?.answerId;
   const isCorrect: boolean | null | undefined = questions[currentQuestion].answers.findIndex((answer) => answer.id === selectedAnswer) !== -1 ? questions[currentQuestion].answers.find((answer) => answer.id === selectedAnswer)?.isCorrect : null;
 
-  if (submitted) {
-    return (
-      <QuizzSubmission
-        score={score}
-        scorePercentage={scorePercentage}
-        totalQuestions={questions.length}
-      />
-    )
-  }
-
   return (
     <div className="flex flex-col flex-1">
-      <div className="position-sticky top-0 z-10 shadow-md py-4 w-full">
-        <header className="grid grid-cols-[auto,1fr,auto] grid-flow-col items-center justify-between py-2 gap-2">
-          <Button size="icon" variant="outline" onClick={handlePressPrev}><ChevronLeft /></Button>
-          <ProgressBar 
-            value={(currentQuestion / questions.length) * 100} 
-            totalQuestions={questions.length} 
-          />
-          <Button size="icon" variant="outline" onClick={handleExit}>
-            <X />
-          </Button>
-        </header>
-      </div>
-      <main className="flex justify-center flex-1">
-        {!started ? <h1 className="text-3xl font-bold">Welcome to the quizz page👋</h1> : (
-          <div>
-            <h2 className="text-3xl font-bold">{questions[currentQuestion].questionText}</h2>
-            <div className="grid grid-cols-1 gap-6 mt-6">
-              {
-                questions[currentQuestion].answers.map(answer => {
-                  const variant = selectedAnswer === answer.id ? (answer.isCorrect ? "neoSuccess" : "neoDanger") : "neoOutline";
-                  return (
-                    <Button key={answer.id} disabled={!!selectedAnswer} variant={variant} size="xl" onClick={() => handleAnswer(answer, questions[currentQuestion].id)} className="disabled:opacity-100"><p className="whitespace-normal">{answer.answerText}</p></Button>
-                  )
-                })
-              }
-            </div>
+      <ToastContainer />
+      {submitted ? (
+        <QuizzSubmission
+          score={score}
+          scorePercentage={scorePercentage}
+          totalQuestions={questions.length}
+        />
+      ) : (
+        <>
+          <div className="position-sticky top-0 z-10 shadow-md py-4 w-full">
+            <header className="grid grid-cols-[auto,1fr,auto] grid-flow-col items-center justify-between py-2 gap-2">
+              <Button size="icon" variant="outline" onClick={handlePressPrev}><ChevronLeft /></Button>
+              <ProgressBar value={(currentQuestion / questions.length) * 100} />
+              <Button size="icon" variant="outline" onClick={handleExit}>
+                <X />
+              </Button>
+            </header>
           </div>
-        )}
-      </main>
-      <footer className="footer pb-9 px-6 relative mb-0">
-        <ResultCard isCorrect={isCorrect} correctAnswer={questions[currentQuestion].answers.find(answer => answer.isCorrect === true)?.answerText || ""} />
-        {
-          (currentQuestion === questions.length - 1) ? <Button variant="neo" size="lg" onClick={handleSubmit}>Submit</Button> :
-            <Button variant="neo" size="lg" onClick={handleNext}>{!started ? 'Start' : 'Next'}</Button>
-        }
-      </footer>
+          <main className="flex justify-center flex-1">
+            {!started ? <h1 className="text-3xl font-bold">Welcome to the quizz page👋</h1> : (
+              <div>
+                <h2 className="text-3xl font-bold">{questions[currentQuestion].questionText}</h2>
+                <div className="grid grid-cols-1 gap-6 mt-6">
+                  {
+                    questions[currentQuestion].answers.map(answer => {
+                      const variant = selectedAnswer === answer.id ? (answer.isCorrect ? "neoSuccess" : "neoDanger") : "neoOutline";
+                      return (
+                        <Button key={answer.id} disabled={!!selectedAnswer} variant={variant} size="xl" onClick={() => handleAnswer(answer, questions[currentQuestion].id)} className="disabled:opacity-100"><p className="whitespace-normal">{answer.answerText}</p></Button>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+            )}
+          </main>
+          <footer className="footer pb-9 px-6 relative mb-0">
+            <ResultCard isCorrect={isCorrect} correctAnswer={questions[currentQuestion].answers.find(answer => answer.isCorrect === true)?.answerText || ""} />
+            {
+              (currentQuestion === questions.length - 1) ? <Button variant="neo" size="lg" onClick={handleSubmit}>Submit</Button> :
+                <Button variant="neo" size="lg" onClick={handleNext}>{!started ? 'Start' : 'Next'}</Button>
+            }
+          </footer>
+        </>
+      )}
     </div>
   )
 }
