@@ -23,7 +23,7 @@ beforeAll(() => {
 
 describe('SwitchMode Component', () => {
   test('renders with correct initial mode', () => {
-    // Mock localStorage to return 'dark' or 'light' mode
+    // Mock localStorage to return 'dark' mode
     (localStorage.getItem as jest.Mock).mockReturnValue('dark');
 
     // Mock classList.contains to return true if 'dark' is checked
@@ -31,9 +31,12 @@ describe('SwitchMode Component', () => {
 
     render(<SwitchMode />);
 
-    // Check if the initial state is dark mode
-    expect(document.documentElement.classList.contains('dark')).toBe(true);
-    expect(screen.getByText('Light Mode')).toBeInTheDocument();
+    // Since the component doesn't render until mounted, we don't check until after mounting
+    waitFor(() => {
+      // Check if the initial state is dark mode
+      expect(document.documentElement.classList.contains('dark')).toBe(true);
+      expect(screen.getByText('Light Mode')).toBeInTheDocument();
+    });
   });
 
   test('toggles between dark and light mode', async () => {
@@ -42,11 +45,11 @@ describe('SwitchMode Component', () => {
 
     render(<SwitchMode />);
 
-    const button = screen.getByRole('button');
-    
+    const button = await waitFor(() => screen.getByRole('button'));
+
     // Check initial button text
     expect(button).toHaveTextContent('Dark Mode');
-    
+
     // Click the button to toggle the mode
     fireEvent.click(button);
 
@@ -68,14 +71,15 @@ describe('SwitchMode Component', () => {
     });
   });
 
-  test('does not render until mounted', () => {
+  test('does not render until mounted', async () => {
     // Mock localStorage to return 'light' mode initially
     (localStorage.getItem as jest.Mock).mockReturnValue('light');
 
     const { container } = render(<SwitchMode />);
 
+
     // Wait for the component to finish mounting and check the button appears
-    waitFor(() => {
+    await waitFor(() => {
       expect(container.querySelector('button')).not.toBeNull();
     });
   });

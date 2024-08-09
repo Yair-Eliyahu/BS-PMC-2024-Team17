@@ -28,6 +28,7 @@ const ProgressBar = (props: Props) => {
               left: `${segmentWidth * (index + 1)}%`,
               width: '1px',
             }}
+            data-testid="progress-bar-separator"
           />
         ))}
     </div>
