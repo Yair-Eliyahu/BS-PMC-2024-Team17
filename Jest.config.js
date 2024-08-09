@@ -1,42 +1,11 @@
-// module.exports = {
-//     preset: "ts-jest",
-//     testEnvironment: "node",
-//     testPathIgnorePatterns: ["/node_modules/", "/dist/"],
-//     reporters: [
-//         "default", 
-//         [
-//             "jest-junit",
-//             { outputDirectory:  "./reports/junit", outputName: "js-test-results.xml" },
-//         ],
-//     ],
-// };
-
-// module.exports = {
-//     preset: 'ts-jest',
-//     testEnvironment: 'jest-environment-jsdom',
-//     setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-//     transform: {
-//       '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest',
-//     },
-//     moduleNameMapper: {
-//       '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-//       '^@/(.*)$': '<rootDir>/src/$1',
-//     },
-//     testPathIgnorePatterns: ['/node_modules/', '/.next/'],
-//     transformIgnorePatterns: ['<rootDir>/node_modules/'],
-//     // transformIgnorePatterns: [
-//     //   'node_modules/(?!(some-es6-package|another-es6-package)/)' 
-//     // ],
-//   };
-  
-const nextJest = require('next/jest')
+const nextJest = require('next/jest');
+const { pathsToModuleNameMapper } = require('ts-jest');
+const { compilerOptions } = require('./tsconfig.json');
 
 const createJestConfig = nextJest({
-    // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-    dir: './',
-})
+  dir: './',
+});
 
-// Add any custom config to be passed to Jest
 /** @type {import('jest').Config} */
 const config = {
     setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
