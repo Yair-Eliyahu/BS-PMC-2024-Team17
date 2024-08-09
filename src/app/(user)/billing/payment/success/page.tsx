@@ -54,4 +54,4 @@ const SuccessPage = async () => {
     );
 };
 
-export default page;
+export default SuccessPage;
