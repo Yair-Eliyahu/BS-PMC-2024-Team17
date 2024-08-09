@@ -92,7 +92,10 @@ export default function QuizzQuestions(props: Props) {
       <div className="position-sticky top-0 z-10 shadow-md py-4 w-full">
         <header className="grid grid-cols-[auto,1fr,auto] grid-flow-col items-center justify-between py-2 gap-2">
           <Button size="icon" variant="outline" onClick={handlePressPrev}><ChevronLeft /></Button>
-          <ProgressBar value={(currentQuestion / questions.length) * 100} />
+          <ProgressBar 
+            value={(currentQuestion / questions.length) * 100} 
+            totalQuestions={questions.length} 
+          />
           <Button size="icon" variant="outline" onClick={handleExit}>
             <X />
           </Button>
