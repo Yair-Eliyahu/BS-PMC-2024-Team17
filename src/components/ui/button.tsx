@@ -26,6 +26,8 @@ const buttonVariants = cva(
         neoOutline: cn(neoClasses, "bg-[#3e406a] text-white border-[#6366a7]"),
         neoSuccess: cn(neoClasses, "bg-green-500 text-primary-foreground border-green-600"),
         neoDanger: cn(neoClasses, "bg-red-500 text-primary-foreground border-red-600"),
+        primary: "bg-blue-500 text-white hover:bg-blue-600",
+        secondaryAlt: "bg-gray-500 text-white hover:bg-gray-600",
 
 
       },
@@ -66,6 +68,8 @@ export const spanVariants = cva(
         neoOutline: "bg-[#6366a7] border-[#6366F6]",
         neoSuccess: "border-green-500 bg-green-600",
         neoDanger: "border-red-500 bg-red-600",
+        primary: "hidden",
+        secondaryAlt: "hidden",
       },
     },
     defaultVariants: {
