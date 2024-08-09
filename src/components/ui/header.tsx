@@ -38,12 +38,6 @@ const Header = async () => {
                 </Link>
             </div>
             <nav className="flex-grow flex justify-between items-center max-w-screen-xl mx-auto">
-                <h1 className="text-3xl font-bold text-black dark:text-white">Sami Quizzer AI</h1>
-            
-                
-                <div className="flex items-center gap-4 mr-2">
-                    {session?.user ? (
-                        <>
                 <h1 className="text-3xl font-bold text-white">Sami Quizzer AI</h1>
 
                 <div className="flex-grow flex justify-end items-center">
