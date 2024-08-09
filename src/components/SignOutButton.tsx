@@ -25,14 +25,20 @@ function SignOutButton() {
   };
 
   return (
-    <Button
+    <button
       onClick={handleClickSignOutButton}
-      className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md"
-      variant="ghost"
+      className="rounded-md p-1 text-white bg-transparent text-sm flex items-center justify-center mr-2 hover:bg-gray-700"
       disabled={isPending}
     >
-      {isPending ? <Loader2 className="animate-spin w-4 h-4" /> : "Sign Out"}
-    </Button>
+      {isPending ? (
+        <Loader2 className="animate-spin w-4 h-4" />
+      ) : (
+        <>
+          <LogOut className="mr-2 w-4 h-4" />
+          Sign Out
+        </>
+      )}
+    </button>
   );
 }
 
