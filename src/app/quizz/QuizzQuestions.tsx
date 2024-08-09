@@ -98,6 +98,7 @@ export default function QuizzQuestions(props: Props) {
           />
           <Button size="icon" variant="outline" onClick={handleExit}>
             <X />
+            
           </Button>
         </header>
       </div>
