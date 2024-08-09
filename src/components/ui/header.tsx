@@ -1,3 +1,4 @@
+
 import { auth, signOut } from "@/auth";
 import { Button } from './button';
 import Image from "next/image";
@@ -8,6 +9,7 @@ import { getUser } from "@/auth/server";
 import SignOutButton from "../SignOutButton";
 import { getUserRole } from "@/app/actions/userSchoolRole";
 import { LogOut, Menu } from "lucide-react";
+import SwitchMode from "../switchMode"; 
 
 function SignOut() {
     return (
@@ -15,10 +17,10 @@ function SignOut() {
             'use server';
             await signOut();
         }}>
-            <Button type="submit" variant="ghost" className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md">
+            <Button type="submit" variant="ghost" className="text-black dark:text-white hover:bg-gray-700 p-2 rounded-md">
             <LogOut className="mr-2 h-4 w-4" />
                 Sign Out
-            </Button>
+            </Button> 
         </form>
     );
 }
@@ -42,13 +44,15 @@ const Header = async () => {
                 </Link>
             </div>
             <nav className="flex-grow flex justify-between items-center max-w-screen-xl mx-auto">
-                <h1 className="text-3xl font-bold text-white">Sami Quizzer AI</h1>
-                <div className="flex-grow flex justify-end items-center">
+                <h1 className="text-3xl font-bold text-black dark:text-white">Sami Quizzer AI</h1>
+
+                <div className="flex items-center gap-4 mr-2">
+                    <SwitchMode /> {/* הוספת ה-SwitchMode כאן */}
                     {regsession ? (
                         <div className="flex flex-row items-center gap-5 mt-0 text-sm">
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                    <Button variant="ghost" className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md">
+                                    <Button variant="ghost" className="flex items-center text-black dark:text-white hover:bg-gray-700 p-2 rounded-md">
                                         <Menu className="w-5 h-5" />
                                         <p className="ml-2">Menu</p>
                                     </Button>
@@ -88,7 +92,9 @@ const Header = async () => {
                         </div>
                     ) : (
                         <Link href="/login">
-                            <Button variant="link" className="rounded-xl border mr-2">Login</Button>
+                            <Button variant="link" className="rounded-xl border mr-2 text-black dark:text-white">
+                                Login
+                            </Button>
                         </Link>
                     )}
                 </div>
