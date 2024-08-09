@@ -45,8 +45,8 @@ export default function Page() {
     };
 
     return (
-        <div className="text-white flex min-h-screen flex-col items-center justify-center p-6 gap-6">
-            <h1 className="text-4xl mb-4 text-white font-bold">Send an Email Invite</h1>
+        <div className="text-black dark:text-white flex min-h-screen flex-col items-center justify-center p-6 gap-6">
+            <h1 className="text-4xl mb-4 text-black dark:text-white font-bold">Send an Email Invite</h1>
             <form onSubmit={handleSubmit} className="text-black flex flex-col gap-4 border-2 border-gray-700 rounded-lg p-20">
                 <input
                     type="text"

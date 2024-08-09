@@ -26,7 +26,7 @@ function SignOutButton() {
   return (
     <button
       onClick={handleClickSignOutButton}
-      className="rounded-md p-1 text-white bg-transparent borderer text-sm flex items-center justify-center mr-2"
+      className="rounded-md p-1 text-black dark:text-white bg-transparent borderer text-sm flex items-center justify-center mr-2"
       disabled={isPending}
     >
       {isPending ? <Loader2 className="animate-spin w-4 h-4" /> : "Sign Out"}

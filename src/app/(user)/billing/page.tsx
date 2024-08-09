@@ -28,7 +28,7 @@ const page = async () => {
         return (
             <div className="flex justify-center items-center py-20 mt-10">
                 <div className="p-8 border-2 border-gray-700 rounded-md w-full max-w-3xl text-center">
-                    <h1 className="text-4xl mb-4 text-white font-bold">Subscription Details</h1>
+                    <h1 className="text-4xl mb-4 text-black dark:text-white font-bold">Subscription Details</h1>
                     <p className="mb-4 text-gray-300">You are currently on a <span className="text-green-400 font-semibold">{plan}</span> plan</p>
                     <ManageSubscrition />
                 </div>
@@ -45,8 +45,8 @@ const page = async () => {
         return (
             <div className="flex justify-center items-center py-20 mt-10">
                 <div className="p-8 border-2 border-gray-700 rounded-md w-full max-w-3xl text-center">
-                    <h1 className="text-4xl mb-4 text-white font-bold">Subscription Details</h1>
-                    <p className="mb-4 text-gray-300">You are currently on a <span className="text-green-400 font-semibold">{plan}</span> plan</p>
+                    <h1 className="text-4xl mb-4 text-black dark:text-white font-bold">Subscription Details</h1>
+                    <p className="mb-4 text-gray-400">You are currently on a <span className="text-green-400 font-semibold">{plan}</span> plan</p>
                     <ManageSubscrition />
                 </div>
             </div>

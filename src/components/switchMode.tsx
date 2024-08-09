@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Moon, Sun } from 'lucide-react';
 
-type Props = {};
+type Props = {
+  className?: string;
+};
 
 const SwitchMode = (props: Props) => {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -39,7 +41,7 @@ const SwitchMode = (props: Props) => {
   }
 
   return (
-    <Button onClick={toggleDarkMode} variant="ghost">
+    <Button onClick={toggleDarkMode} variant="ghost" className="${className} mt-2">
       {darkMode ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
       {darkMode ? 'Light Mode' : 'Dark Mode'}
     </Button>
