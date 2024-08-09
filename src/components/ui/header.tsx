@@ -7,7 +7,7 @@ import { NavMenu } from "@/components/NavMenu";
 import { getUser } from "@/auth/server";
 import SignOutButton from "../SignOutButton";
 import { getUserRole } from "@/app/actions/userSchoolRole";
-import { Menu } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 
 function SignOut() {
     return (
@@ -15,9 +15,12 @@ function SignOut() {
             'use server';
             await signOut();
         }}>
-            <Button type="submit" variant="ghost" className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md">Sign Out</Button>
+            <Button type="submit" variant="ghost" className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md">
+            <LogOut className="mr-2 h-4 w-4" />
+                Sign Out
+            </Button>
         </form>
-    );
+    );
 }
 
 const Header = async () => {
