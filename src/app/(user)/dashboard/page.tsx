@@ -11,7 +11,6 @@ import { getUser } from "@/auth/server";
 import { getUserRole } from "@/app/actions/userSchoolRole";
 import getAllQuizzesWithStudentNamesAndScores from "@/app/actions/getAllQuizzesWithStudentName";
 import AllQuizzesTable from "./allQuizzesTable";
-import SummaryCard from "./SummaryCard";
 import PieChart from "./PieChart";
 import getTotalStudents from "@/app/actions/getTotalStudents";
 import getAverageScore from "@/app/actions/getAverageScore";
@@ -59,11 +58,27 @@ const page = async () => {
                 </div>
             )
         } else if (userRole === "Educator" || userRole === "Manager") {
-            // Fetch all quizzes with student names and scores
             const allQuizzesWithDetails = await getAllQuizzesWithStudentNamesAndScores();
+            const totalStudents = await getTotalStudents();
+            const averageScore = await getAverageScore();
+            const highestScore = await getHighestScore();
+            const pieChartData = {
+                labels: ['Total Students', 'Average Score', 'Highest Score'],
+                values: [totalStudents, roundIfNumber(averageScore), highestScore],
+            };
+
             return (
                 <div className="mt-20">
-                    <h1></h1>
+                    <div className="flex items-center justify-center gap-2">
+                        <h1 className="text-4xl mb-6">Students Information</h1>
+                        <BadgeInfo className="w-8 h-8 mb-6" />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <MetricCard label="Total Students" value={totalStudents} />
+                        <MetricCard label="Average Score" value={roundIfNumber(averageScore)} />
+                        <MetricCard label="Highest Score" value={highestScore} />
+                        <PieChart data={pieChartData} />
+                    </div>
                     <AllQuizzesTable quizzes={allQuizzesWithDetails} />
                 </div>
             );
@@ -113,10 +128,10 @@ const page = async () => {
                         <h1 className="text-4xl mb-6">Students Information</h1>
                         <BadgeInfo className="w-8 h-8 mb-6" />
                     </div>
-                    <div className="mb-6">
-                        <SummaryCard title="Total Students" value={totalStudents} />
-                        <SummaryCard title="Average Score" value={roundIfNumber(averageScore)} />
-                        <SummaryCard title="Highest Score" value={highestScore} />
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <MetricCard label="Total Students" value={totalStudents} />
+                        <MetricCard label="Average Score" value={roundIfNumber(averageScore)} />
+                        <MetricCard label="Highest Score" value={highestScore} />
                         <PieChart data={pieChartData} />
                     </div>
                     <AllQuizzesTable quizzes={allQuizzesWithDetails} />
