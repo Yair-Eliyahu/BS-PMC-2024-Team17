@@ -41,7 +41,7 @@ const SwitchMode = (props: Props) => {
   }
 
   return (
-    <Button onClick={toggleDarkMode} variant="ghost" className="${className} mt-2">
+    <Button onClick={toggleDarkMode} variant="ghost" className="text-black dark:text-white hover:bg-gray-700 p-2 rounded-md">
       {darkMode ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
       {darkMode ? 'Light Mode' : 'Dark Mode'}
     </Button>

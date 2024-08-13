@@ -47,7 +47,7 @@ const Header = async () => {
                 <h1 className="text-3xl font-bold text-black dark:text-white">Sami Quizzer AI</h1>
 
                 <div className="flex items-center gap-4 mr-2">
-                    <SwitchMode /> {/* הוספת ה-SwitchMode כאן */}
+                    <SwitchMode /> {/* SwitchMode componenet */}
                     {regsession ? (
                         <div className="flex flex-row items-center gap-5 mt-0 text-sm">
                             <DropdownMenu>
@@ -92,7 +92,7 @@ const Header = async () => {
                         </div>
                     ) : (
                         <Link href="/login">
-                            <Button variant="link" className="rounded-xl border mr-2 text-black dark:text-white">
+                            <Button variant="ghost" className="text-black dark:text-white hover:bg-gray-700 p-2 rounded-md">
                                 Login
                             </Button>
                         </Link>
