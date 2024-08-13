@@ -69,7 +69,7 @@ const Header = async () => {
                                     <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
 
-                                                <Button variant="ghost" className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md">
+                                                <Button variant="ghost" className="flex items-center text-black dark:text-white hover:bg-gray-700 p-2 rounded-md">
                                                     <Menu className="w-5 h-5" />
                                                     <p className="ml-2">Menu</p>
                                                 </Button>
