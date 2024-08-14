@@ -6,7 +6,7 @@ const QuizzesDonePage = async () => {
 
     return (
         <div className="flex flex-col items-center justify-center mt-20">
-            <h1 className="text-3xl font-bold text-gray-400 mb-8 text-center">
+            <h1 className="text-3xl font-bold mb-8 text-center">
                 Completed Quizzes Information
             </h1>
             <div className="w-full max-w-2xl">
