@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const Support = () => {
   const [name, setName] = useState('');
@@ -36,7 +37,7 @@ const Support = () => {
         <h1 className="text-3xl font-bold mb-6 text-center">Support</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-400">
               Name
             </label>
             <input
@@ -48,21 +49,8 @@ const Support = () => {
               required
             />
           </div>
-          {/* <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
-              required
-            />
-          </div> */}
           <div className="mb-4">
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="message" className="block text-sm font-medium text-gray-400">
               Message
             </label>
             <textarea
@@ -73,7 +61,10 @@ const Support = () => {
               required
             />
           </div>
-          <Button type="submit" className="w-full">Send</Button>
+          <Button type="submit" className="w-full px-4 py-2 text-lg flex items-center justify-center gap-2">
+            Send
+            <ArrowRight className="w-5 h-5" />
+          </Button>
         </form>
         {status && <p className="mt-4 text-sm text-red-500 text-center">{status}</p>}
       </div>

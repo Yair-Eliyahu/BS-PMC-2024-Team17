@@ -9,8 +9,6 @@ import MetricCard from "./metricCard";
 import SubmissionsHeatMap from "./heatMap";
 import { getUser } from "@/auth/server";
 import { getUserRole } from "@/app/actions/userSchoolRole";
-import getAllQuizzesWithStudentNamesAndScores from "@/app/actions/getAllQuizzesWithStudentName";
-import AllQuizzesTable from "./allQuizzesTable";
 import PieChart from "./PieChart";
 import getTotalStudents from "@/app/actions/getTotalStudents";
 import getAverageScore from "@/app/actions/getAverageScore";
@@ -20,6 +18,7 @@ import { BadgeInfo } from "lucide-react";
 
 
 const page = async () => {
+
     const session = await auth();
     const userId = session?.user?.id;
 
@@ -58,7 +57,6 @@ const page = async () => {
                 </div>
             )
         } else if (userRole === "Educator" || userRole === "Manager") {
-            const allQuizzesWithDetails = await getAllQuizzesWithStudentNamesAndScores();
             const totalStudents = await getTotalStudents();
             const averageScore = await getAverageScore();
             const highestScore = await getHighestScore();
@@ -79,7 +77,6 @@ const page = async () => {
                         <MetricCard label="Highest Score" value={highestScore} />
                         <PieChart data={pieChartData} />
                     </div>
-                    <AllQuizzesTable quizzes={allQuizzesWithDetails} />
                 </div>
             );
         }
@@ -113,7 +110,6 @@ const page = async () => {
                 </div>
             )
         } else if (userRole === "Educator" || userRole === "Manager") {
-            const allQuizzesWithDetails = await getAllQuizzesWithStudentNamesAndScores();
             const totalStudents = await getTotalStudents();
             const averageScore = await getAverageScore();
             const highestScore = await getHighestScore();
@@ -134,7 +130,6 @@ const page = async () => {
                         <MetricCard label="Highest Score" value={highestScore} />
                         <PieChart data={pieChartData} />
                     </div>
-                    <AllQuizzesTable quizzes={allQuizzesWithDetails} />
                 </div>
             );
         }
@@ -142,7 +137,3 @@ const page = async () => {
 }
 
 export default page;
-
-
-
-

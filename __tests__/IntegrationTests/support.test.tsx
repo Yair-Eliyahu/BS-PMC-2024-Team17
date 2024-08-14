@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Support from './page';
+import Support from '@/app/support/page'; 
 import { useRouter } from 'next/navigation';
 
 jest.mock('next/navigation', () => ({
