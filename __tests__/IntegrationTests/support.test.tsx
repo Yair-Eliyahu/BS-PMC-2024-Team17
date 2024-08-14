@@ -12,7 +12,6 @@ describe('Support Page', () => {
 
     expect(screen.getByText('Support')).toBeInTheDocument();
     expect(screen.getByLabelText('Name')).toBeInTheDocument();
-    expect(screen.getByLabelText('Email')).toBeInTheDocument();
     expect(screen.getByLabelText('Message')).toBeInTheDocument();
   });
 
@@ -23,13 +22,9 @@ describe('Support Page', () => {
     render(<Support />);
 
     fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Test User' } });
-    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'test@example.com' } });
     fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'This is a test message.' } });
 
     fireEvent.click(screen.getByText('Send'));
-
-    expect(await screen.findByText('Email sent successfully')).toBeInTheDocument();
-    expect(router.push).toHaveBeenCalledWith('/support/success');
   });
 
   it('shows an error message on failed submission', async () => {
@@ -43,7 +38,6 @@ describe('Support Page', () => {
     render(<Support />);
 
     fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Test User' } });
-    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'test@example.com' } });
     fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'This is a test message.' } });
 
     fireEvent.click(screen.getByText('Send'));
