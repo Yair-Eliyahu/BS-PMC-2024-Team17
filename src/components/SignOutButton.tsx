@@ -5,7 +5,6 @@ import { Loader2, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
-import { Button } from "./ui/button";
 
 function SignOutButton() {
   const router = useRouter();

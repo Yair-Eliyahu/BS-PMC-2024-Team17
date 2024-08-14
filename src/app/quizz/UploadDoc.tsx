@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { ClockLoader, PacmanLoader } from 'react-spinners';
+import { ClockLoader } from 'react-spinners';
 import { useReward } from 'react-rewards';
 
 const UploadDoc = () => {

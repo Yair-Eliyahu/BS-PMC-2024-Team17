@@ -20,10 +20,10 @@ const getAllQuizzesWithStudentNamesAndScores = async () => {
 
     return quizzesWithDetails.map((quiz) => ({
         id: quiz.quizId,
-        name: quiz.quizName,           // Quiz name
+        name: quiz.quizName,         
         userId: quiz.userId,
-        studentName: quiz.studentName || 'Unknown',  // Student name
-        grade: quiz.averageScore || 'No Score'  // Average score, handle missing data
+        studentName: quiz.studentName || 'Unknown',
+        grade: quiz.averageScore || 'No Score'
     }));
 };
 

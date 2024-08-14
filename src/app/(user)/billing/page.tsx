@@ -4,7 +4,6 @@ import ManageSubscrition from "./ManageSubscription";
 import { auth,signIn } from "@/auth";
 import { db } from "@/db";
 import { users } from "@/db/schema";
-import { stripe } from "@/lib/stripe";
 import { eq } from "drizzle-orm";
 import { getUser } from "@/auth/server";
 

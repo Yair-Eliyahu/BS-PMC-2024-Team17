@@ -1,4 +1,3 @@
-// src/app/api/mail/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { sendMail } from '@/lib/mail';
 

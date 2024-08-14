@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { quizzSubmissions } from "@/db/schema";
-import { max } from "drizzle-orm"; // Ensure this is available in your ORM version
+import { max } from "drizzle-orm";
 
 const getHighestScore = async () => {
     try {
@@ -13,10 +13,10 @@ const getHighestScore = async () => {
         if (result.length > 0) {
             return result[0].value || 0;
         }
-        return 0; // Default value if no result found
+        return 0;
     } catch (error) {
         console.error("Error fetching highest score:", error);
-        return 0; // Default value in case of error
+        return 0;
     }
 };
 

@@ -1,7 +1,6 @@
 "use client";
-import { use, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { set } from "react-hook-form";
 import ProgressBar from "@/components/progressBar";
 import { ChevronLeft, X } from "lucide-react";
 import ResultCard from "./ResultCard";

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 const ManageRolesPage = () => {
     const [userList, setUserList] = useState<any[]>([]);
-    const [roleMap, setRoleMap] = useState<{ [key: string]: string }>({}); // To store user id and selected roles
+    const [roleMap, setRoleMap] = useState<{ [key: string]: string }>({});
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -13,7 +13,6 @@ const ManageRolesPage = () => {
                 const response = await fetch('/api/get-users');
                 const data = await response.json();
                 setUserList(data.users);
-                // Initialize roleMap with current roles
                 const initialRoleMap = data.users.reduce((map: { [key: string]: string }, user: any) => {
                     map[user.id] = user.schoolRole;
                     return map;
