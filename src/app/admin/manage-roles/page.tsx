@@ -73,8 +73,8 @@ const ManageRolesPage = () => {
                                         <select
                                             value={roleMap[user.id] || ''}
                                             onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                                            className="mr-2 bg-white text-center text-black border border-gray-400"
-                                        >
+                                            className="mr-2 bg-white text-center text-black border border-gray-400 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            >
                                             <option value="">Select Role</option>
                                             <option value="Student">Student</option>
                                             <option value="Educator">Educator</option>
