@@ -2,9 +2,6 @@ import React from 'react'
 import UploadDoc from '../UploadDoc'
 import { auth, signIn } from '@/auth'
 import { getUserSubscription } from '@/app/actions/userSubscription'
-import { Lock, Flame } from 'lucide-react'
-import { getStripe } from "@/lib/stripe-client";
-import { PRICE_ID } from '@/lib/utils'
 import UpgradePlan from '../UpgradePlan'
 import { getUser } from '@/auth/server'
 

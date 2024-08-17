@@ -1,9 +1,7 @@
 "use client";
 import { Lock, Flame } from 'lucide-react'
 import { getStripe } from "@/lib/stripe-client";
-import { useRouter } from "next/navigation";
 import { PRICE_ID } from '@/lib/utils'
-
 
 const UpgradePlan = () => {
 

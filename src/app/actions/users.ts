@@ -2,8 +2,8 @@
 
 import { createSupabaseClient, protectRoute } from "@/auth/server";
 import { getErrorMessage } from "@/lib/utils";
-import { db } from "@/db"; // Import your db instance
-import { users } from "@/db/schema"; // Import your schema for the user table
+import { db } from "@/db";
+import { users } from "@/db/schema";
 
 export const createAccountAction = async (formData: FormData) => {
   try {
@@ -28,16 +28,14 @@ export const createAccountAction = async (formData: FormData) => {
     // Extract user information
     const { id, email: userEmail } = data.user;
 
-    // Type guard to ensure `id` is a string
     if (typeof id !== "string") {
       throw new Error("Invalid user ID type.");
     }
 
     // Insert the new user into your custom 'user' table
     await db.insert(users).values({
-      id: id as string, // Explicit type assertion to string
+      id: id as string, 
       email: userEmail as string,
-      // Add other fields as necessary, e.g., name, image, etc.
     });
 
     return { errorMessage: null };

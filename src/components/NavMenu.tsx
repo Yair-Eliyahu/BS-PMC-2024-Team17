@@ -3,14 +3,10 @@
 import * as React from "react"
 import { DropdownMenuCheckboxItemProps, DropdownMenuGroup, DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import Link from "next/link";
-import { Button } from "@/components/ui/button"
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { BarChartBig, CreditCard, LifeBuoy, User, UserPlus, Plus, Calendar} from "lucide-react"
 import SwitchMode from "@/components/switchMode";

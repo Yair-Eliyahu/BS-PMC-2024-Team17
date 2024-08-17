@@ -22,7 +22,7 @@ function SignOut() {
                 Sign Out
             </Button> 
         </form>
-    );
+    );
 }
 
 const Header = async () => {
@@ -47,7 +47,7 @@ const Header = async () => {
                 <h1 className="text-3xl font-bold text-black dark:text-white">Sami Quizzer AI</h1>
 
                 <div className="flex items-center gap-4 mr-2">
-                    <SwitchMode /> {/* SwitchMode componenet */}
+                    <SwitchMode />
                     {regsession ? (
                         <div className="flex flex-row items-center gap-5 mt-0 text-sm">
                             <DropdownMenu>
@@ -69,12 +69,10 @@ const Header = async () => {
                                     <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
 
-                                                <Button variant="ghost" className="flex items-center text-white hover:bg-gray-700 p-2 rounded-md">
+                                                <Button variant="ghost" className="flex items-center text-black dark:text-white hover:bg-gray-700 p-2 rounded-md">
                                                     <Menu className="w-5 h-5" />
                                                     <p className="ml-2">Menu</p>
                                                 </Button>
-
-
                                             </DropdownMenuTrigger>
                                             <NavMenu />
                                     </DropdownMenu>

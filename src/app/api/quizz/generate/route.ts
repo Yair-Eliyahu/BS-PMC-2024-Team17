@@ -4,7 +4,6 @@ import { HumanMessage } from "@langchain/core/messages";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 import saveQuizz from "./saveToDb";
-import { Session } from "inspector";
 import { auth } from "@/auth";
 import { getUser } from "@/auth/server";
 

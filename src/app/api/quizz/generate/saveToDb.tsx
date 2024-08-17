@@ -18,7 +18,7 @@ export default async function saveQuizz(quizzData: SaveQuizzData, userId: string
         .values({
             name,
             description,
-            userId  // Include userId in the insertion
+            userId
         })
         .returning({ insertedId: quizzes.id });
     const quizzId = newQuizz[0].insertedId;

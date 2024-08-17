@@ -62,7 +62,6 @@ export async function getUserSubscriptionId({
     userId?: string;
     regUserId?: string;
 }) {
-    // Determine which ID to use
     const idToQuery = userId || regUserId;
 
     if (!idToQuery) {

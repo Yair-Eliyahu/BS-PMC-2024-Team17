@@ -28,12 +28,9 @@ const SuccessPage = async () => {
         } else {
             console.warn("No valid stripeCustomerID found.");
         }
-
-        // Optionally, redirect after successful operation
         redirect('/dashboard');
     } catch (error) {
         console.error("Error in SuccessPage:", error);
-        // Handle error appropriately
     }
 
     return (
