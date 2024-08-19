@@ -58,11 +58,11 @@ export function NavMenu() {
         </DropdownMenuItem>
 
         <DropdownMenuItem className="mb-2">
-          <Link href="/quizz/new" className="flex flex-row items-center">
-            <Plus className="mr-2 h-4 w-4" />
-            <span>New Quizz</span>
+          <Link href="/Invite/" className="flex flex-row items-center">
+            <UserPlus className="mr-2 h-4 w-4" />
+            <span>Invite Users</span>
           </Link>
-        </DropdownMenuItem>    
+        </DropdownMenuItem>
 
       <DropdownMenuGroup>
         <DropdownMenuSeparator />
@@ -70,17 +70,14 @@ export function NavMenu() {
 
       <DropdownMenuGroup>
         <DropdownMenuItem className="mb-2">
-          <Link href="/Invite/" className="flex flex-row items-center">
-            <UserPlus className="mr-2 h-4 w-4" />
-            <span>Invite Users</span>
+          <Link href="/quizz/new" className="flex flex-row items-center">
+            <Plus className="mr-2 h-4 w-4" />
+            <span>New Quizz</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
       </DropdownMenuGroup>
 
-      <DropdownMenuItem className="mb-2">
-             <SwitchMode className="mr-2 h-4 w-4"/>
-        </DropdownMenuItem>
       </DropdownMenuGroup>
 
       <DropdownMenuGroup>
