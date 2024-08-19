@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ManageRolesPage = () => {
     const [userList, setUserList] = useState<any[]>([]);
@@ -42,17 +44,19 @@ const ManageRolesPage = () => {
                     user.id === userId ? { ...user, schoolRole: newRole } : user
                 ));
                 setRoleMap({ ...roleMap, [userId]: newRole });
+                toast.success('User role updated successfully!');
             } else {
-                alert(result.error || 'Error updating role');
+                toast.error(result.error || 'Error updating role');
             }
         } catch (error) {
             console.error('Error updating role:', error);
-            alert('Error updating role');
+            toast.error('Error updating role');
         }
     };
 
     return (
         <div className="mt-20 px-4">
+            <ToastContainer />
             <h1 className="text-3xl font-bold text-center mb-8">Manage User Roles</h1>
             <div className="flex justify-center">
                 <div className="overflow-x-auto w-full max-w-2xl">
@@ -72,7 +76,7 @@ const ManageRolesPage = () => {
                                     <td className="py-3 px-6 border-b">
                                         <select
                                             value={roleMap[user.id] || ''}
-                                            onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                                            onChange={(e) => setRoleMap({ ...roleMap, [user.id]: e.target.value })}
                                             className="mr-2 bg-white text-center text-black border border-gray-400 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                             >
                                             <option value="">Select Role</option>

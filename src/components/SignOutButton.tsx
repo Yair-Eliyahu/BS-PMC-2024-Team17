@@ -5,6 +5,7 @@ import { Loader2, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
+import { Button } from "./ui/button";
 
 function SignOutButton() {
   const router = useRouter();
@@ -24,9 +25,10 @@ function SignOutButton() {
   };
 
   return (
-    <button
+    <Button
       onClick={handleClickSignOutButton}
-      className="rounded-md p-1 text-black dark:text-white bg-transparent borderer text-sm flex items-center justify-center mr-2 hover:bg-gray-700"
+      variant="ghost" 
+      className="flex items-center text-black dark:text-white hover:bg-gray-700 p-2 rounded-md"
       disabled={isPending}
     >
       {isPending ? (
@@ -37,7 +39,7 @@ function SignOutButton() {
           Sign Out
         </>
       )}
-    </button>
+    </Button>
   );
 }
 

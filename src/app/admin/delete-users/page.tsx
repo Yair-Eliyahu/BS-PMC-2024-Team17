@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DeleteUsersPage = () => {
     const [userList, setUserList] = useState<any[]>([]);
@@ -31,17 +33,19 @@ const DeleteUsersPage = () => {
             
             if (result.success) {
                 setUserList(userList.filter(user => user.id !== userId));
+                toast.success('User deleted successfully!');
             } else {
-                alert(result.error || 'Error deleting user');
+                toast.error(result.error || 'Error deleting user');
             }
         } catch (error) {
             console.error('Error deleting user:', error);
-            alert('Error deleting user');
+            toast.error('Error deleting user');
         }
     };
 
     return (
         <div className="mt-20 px-4">
+            <ToastContainer />
             <h1 className="text-3xl font-bold text-center mb-8">Manage Users</h1>
             <div className="flex justify-center">
                 <div className="overflow-x-auto w-full max-w-2xl">
