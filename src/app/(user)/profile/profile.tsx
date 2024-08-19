@@ -59,6 +59,7 @@ const ProfilePage = () => {
     setCountryName(fullCountryName);
   };
 
+  
   return (
     <div className="space-y-6 text-center">
       <div className="flex flex-col items-center space-y-4">
@@ -125,9 +126,10 @@ const ProfilePage = () => {
             >
               <option value="male">Male</option>
               <option value="female">Female</option>
+              <option value="other">Other</option>
             </select>
           ) : (
-            <p className="text-gray-300 mt-2">{gender}</p>
+            <p className="text-gray-300 mt-2 capitalize">{gender}</p>
           )}
         </div>
         <div className="bg-gray-700 p-4 rounded-lg shadow-md">

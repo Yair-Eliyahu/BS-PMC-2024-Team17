@@ -32,7 +32,7 @@ export default async function Home() {
     ? `${greeting.message}, ${session.user.email}!`
     : `Welcome to SamiQuizzer AI!`;
 
-    if (userRole === "Educator" || userRole === "Manager") {
+    if (userRole === "Manager") {
       return (
         <div className="flex flex-col flex-1 mt-20">
           <main className="flex justify-center flex-1">
