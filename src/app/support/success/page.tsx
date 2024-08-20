@@ -8,11 +8,11 @@ const SuccessPage = () => {
         <h1 className="text-2xl font-bold mb-4 text-black dark:text-white">Email Sent Successfully!</h1>
         <p className="mb-6 text-black dark:text-white">Your message has been sent successfully. We will get back to you shortly.</p>
         <div className="space-x-4">
-          <Link href="/">
-            <Button variant="primary">Go to Home</Button>
+        <Link href="/">
+            <Button variant="primary" className="p-5 text-xl">Home</Button>
           </Link>
           <Link href="/support">
-            <Button variant="secondaryAlt">Back to Support</Button>
+            <Button variant="secondaryAlt" className="p-5 text-xl">Back to Support</Button>
           </Link>
         </div>
       </div>
