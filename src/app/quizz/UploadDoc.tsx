@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import ClipLoader from "react-spinners/ClipLoader";
+import { ClockLoader } from 'react-spinners';
 import { useReward } from 'react-rewards';
 
 const UploadDoc = () => {
@@ -10,7 +10,7 @@ const UploadDoc = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const router = useRouter();
-    const { reward, isAnimating } = useReward('rewardId', 'emoji');
+    const { reward, isAnimating } = useReward('rewardId', 'confetti');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -50,8 +50,9 @@ const UploadDoc = () => {
     return (
         <div className="w-full">
             {isLoading ? 
-                <div className="flex justify-center items-center h-20">
-                    <ClipLoader size={50} color={"#123abc"} loading={isLoading} />
+                <div className="flex flex-col justify-center items-center h-40">
+                    <ClockLoader size={60} color={"#123abc"} loading={isLoading} />
+                    <p className="text-blue-600 mt-2">Generating your quiz... Please wait!</p>
                 </div> 
                 : 
                 <form className="w-full" onSubmit={handleSubmit}>

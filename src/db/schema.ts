@@ -6,11 +6,10 @@ import {
     integer,
     serial,
     boolean,
-    pgEnum,
 } from "drizzle-orm/pg-core";
-import type { AdapterAccount } from "@auth/core/adapters";
 import { relations } from "drizzle-orm";
 import type { AdapterAccountType } from "next-auth/adapters"
+
 
 export const users = pgTable("user", {
     id: text("id")
@@ -23,6 +22,7 @@ export const users = pgTable("user", {
     image: text("image"),
     stripeCustomerID: text("stripe_customer_id"),
     subscribed: boolean("subscribed"),
+    schoolRole: text("schoolRole").default('Student'),
   })
 
   export const usersRelations = relations(users, ({ many }) => ({

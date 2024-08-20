@@ -1,26 +1,23 @@
-// module.exports = {
-//     preset: "ts-jest",
-//     testEnvironment: "node",
-//     testPathIgnorePatterns: ["/node_modules/", "/dist/"],
-//     reporters: [
-//         "default", 
-//         [
-//             "jest-junit",
-//             { outputDirectory:  "./reports/junit", outputName: "js-test-results.xml" },
-//         ],
-//     ],
-// };
+const nextJest = require('next/jest');
+const { pathsToModuleNameMapper } = require('ts-jest');
+const { compilerOptions } = require('./tsconfig.json');
 
-module.exports = {
-    preset: 'ts-jest',
-    testEnvironment: 'jest-environment-jsdom',
+const createJestConfig = nextJest({
+  dir: './',
+});
+
+/** @type {import('jest').Config} */
+const config = {
     setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-    transform: {
-      '^.+\\.(ts|tsx|js|jsx)$': 'ts-jest',
-    },
+    testEnvironment: 'jest-environment-jsdom',
+    preset: 'ts-jest',
     moduleNameMapper: {
-      '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    },
-    testPathIgnorePatterns: ['/node_modules/', '/.next/'],
-  };
-  
+        '^@/(.*)$': '<rootDir>/src/$1',
+        '^@/db$': '<rootDir>/__mocks__/db.ts',
+      },
+    setupFiles: ['<rootDir>/__mocks__/next.ts'],
+    clearMocks: true,
+}
+
+// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+module.exports = createJestConfig(config)

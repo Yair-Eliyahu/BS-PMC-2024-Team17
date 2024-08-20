@@ -3,24 +3,26 @@
 import * as React from "react"
 import { DropdownMenuCheckboxItemProps, DropdownMenuGroup, DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import Link from "next/link";
-import { Button } from "@/components/ui/button"
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { BarChartBig, CreditCard, LifeBuoy, Settings, User, UserPlus, Plus, Github} from "lucide-react"
+import { BarChartBig, CreditCard, LifeBuoy, User, UserPlus, Plus, Calendar} from "lucide-react"
+import SwitchMode from "@/components/switchMode";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
+
+type NavMenuProps = {
+  session: any; // Replace with the appropriate type
+  regsession: any; // Replace with the appropriate type
+};
 
 export function NavMenu() {
   const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
   const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
   const [showPanel, setShowPanel] = React.useState<Checked>(false)
-
+  
   return (
     <DropdownMenuContent className="w-56">
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -33,6 +35,13 @@ export function NavMenu() {
             <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
+        
+          <DropdownMenuItem className="mb-2">
+            <Link href="/calendar" className="flex flex-row items-center">
+              <Calendar className="mr-2 h-4 w-4" />
+              <span>Calendar</span>
+            </Link>
+          </DropdownMenuItem>
 
         <DropdownMenuItem className="mb-2">
           <Link href="/profile" className="flex flex-row items-center">
@@ -49,38 +58,26 @@ export function NavMenu() {
         </DropdownMenuItem>
 
         <DropdownMenuItem className="mb-2">
-          <Link href="/quizz/new" className="flex flex-row items-center">
-            <Plus className="mr-2 h-4 w-4" />
-            <span>New Quizz</span>
-          </Link>
-        </DropdownMenuItem>    
-
-      <DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="mb-2">
-          <Link href="https://github.com/Yair-Eliyahu/BS-PMC-2024-Team17.git" className="flex flex-row items-center">
-          <Github className="mr-2 h-4 w-4" />
-          <span>GitHub</span>
-          </Link>
-        </DropdownMenuItem>
-      </DropdownMenuGroup>
-
-      <DropdownMenuGroup>
-        <DropdownMenuItem className="mb-2">
-          <Link href="/invite-users" className="flex flex-row items-center">
+          <Link href="/Invite/" className="flex flex-row items-center">
             <UserPlus className="mr-2 h-4 w-4" />
             <span>Invite Users</span>
           </Link>
         </DropdownMenuItem>
+
+      <DropdownMenuGroup>
         <DropdownMenuSeparator />
       </DropdownMenuGroup>
 
-      <DropdownMenuItem className="mb-2">
-          <Link href="/settings" className="flex flex-row items-center">
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
+      <DropdownMenuGroup>
+        <DropdownMenuItem className="mb-2">
+          <Link href="/quizz/new" className="flex flex-row items-center">
+            <Plus className="mr-2 h-4 w-4" />
+            <span>New Quizz</span>
           </Link>
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
+      </DropdownMenuGroup>
+
       </DropdownMenuGroup>
 
       <DropdownMenuGroup>
@@ -91,7 +88,7 @@ export function NavMenu() {
           </Link>
         </DropdownMenuItem>
       </DropdownMenuGroup>
-
+      
     </DropdownMenuContent>
   )
 }
