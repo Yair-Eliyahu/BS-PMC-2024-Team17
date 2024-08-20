@@ -19,7 +19,7 @@ const AllQuizzesTable = (props: Props) => {
                     <thead>
                         <tr>
                             <th className="text-[#6c7381] text-left px-4 py-2">Name</th>
-                            <th className="text-[#6c7381] text-left px-4 py-2">Student Name</th>
+                            <th className="text-[#6c7381] text-left px-4 py-2">Student Email</th>
                             <th className="text-[#6c7381] text-left px-4 py-2">Grade</th> {/* New column for Grade */}
                         </tr>
                     </thead>
@@ -33,7 +33,7 @@ const AllQuizzesTable = (props: Props) => {
                                         </p>
                                     </Link>
                                 </td>
-                                <td className="px-4 py-2">{quizz.studentName}</td>
+                                <td className="px-4 py-2">{quizz.studentEmail}</td>
                                 <td className="px-4 py-2">{roundIfNumber(quizz.grade)}</td> {/* Display the grade */}
                             </tr>
                         )}
