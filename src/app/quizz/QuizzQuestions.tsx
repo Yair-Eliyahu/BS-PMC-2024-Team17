@@ -1,86 +1,99 @@
 "use client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import ProgressBar from "@/components/progressBar";
-import { ChevronLeft, X } from "lucide-react";
-import ResultCard from "./ResultCard";
-import QuizzSubmission from "./QuizzSubmission";
-import { InferSelectModel } from "drizzle-orm";
-import { questionAnswers, questions as DbQuestions, quizzes } from "@/db/schema";
-import { saveSubmission } from "@/actions/saveSubmissions";
-import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { ChevronLeft, X } from "lucide-react"; // Icons for navigation
+import ResultCard from "./ResultCard"; // Component to display result after each question
+import QuizzSubmission from "./QuizzSubmission"; // Component to display the final submission screen
+import { InferSelectModel } from "drizzle-orm"; // Type helper for database models
+import { questionAnswers, questions as DbQuestions, quizzes } from "@/db/schema"; // Database schema
+import { saveSubmission } from "@/actions/saveSubmissions"; // Action to save the quiz submission
+import { useRouter } from "next/navigation"; // Hook for navigating within the app
+import { ToastContainer, toast } from "react-toastify"; // Toast notifications
+import 'react-toastify/dist/ReactToastify.css'; // Toast notification styles
 
+// Types for the answers, questions, and quiz
 type Answer = InferSelectModel<typeof questionAnswers>;
 type Question = InferSelectModel<typeof DbQuestions> & { answers: Answer[] };
 type Quizz = InferSelectModel<typeof quizzes> & { questions: Question[] };
 
 type Props = {
-  quizz: Quizz
-}
+  quizz: Quizz; // Props containing the quiz data
+};
 
 export default function QuizzQuestions(props: Props) {
-  const { questions } = props.quizz;
-  const [started, setStarted] = useState<boolean>(false);
-  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
-  const [score, setScore] = useState<number>(0);
-  const [userAnswers, setUserAnswers] = useState<{ questionId: number, answerId: number }[]>([]);
-  const [submitted, setSubmitted] = useState<boolean>(false);
-  const router = useRouter();
+  const { questions } = props.quizz; // Destructure the questions from the quiz prop
 
+  // State management for quiz flow
+  const [started, setStarted] = useState<boolean>(false); // Tracks if the quiz has started
+  const [currentQuestion, setCurrentQuestion] = useState<number>(0); // Tracks the current question index
+  const [score, setScore] = useState<number>(0); // Tracks the user's score
+  const [userAnswers, setUserAnswers] = useState<{ questionId: number, answerId: number }[]>([]); // Stores user's answers
+  const [submitted, setSubmitted] = useState<boolean>(false); // Tracks if the quiz has been submitted
+  const router = useRouter(); // Router instance for navigation
+
+  // Function to handle moving to the next question or starting the quiz
   const handleNext = () => {
     if (!started) {
-      setStarted(true);
+      setStarted(true); // Start the quiz
       return;
     }
 
     if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+      setCurrentQuestion(currentQuestion + 1); // Move to the next question
     } else {
-      setSubmitted(true);
-      return;
+      setSubmitted(true); // If on the last question, mark the quiz as submitted
     }
-  }
+  };
 
+  // Function to handle when a user selects an answer
   const handleAnswer = (answer: Answer, questionId: number) => {
     const newUserAnswersArr = [...userAnswers, {
       questionId,
       answerId: answer.id,
     }];
-    setUserAnswers(newUserAnswersArr);
-    const isCurrentCorrect = answer.isCorrect;
-    if (isCurrentCorrect) {
-      setScore(score + 1);
-    }
-  }
+    setUserAnswers(newUserAnswersArr); // Add the answer to the user's answers
 
+    if (answer.isCorrect) {
+      setScore(score + 1); // Increase the score if the answer is correct
+    }
+  };
+
+  // Function to handle quiz submission
   const handleSubmit = async () => {
     try {
-      const subId = await saveSubmission({ score }, props.quizz.id);
+      const subId = await saveSubmission({ score }, props.quizz.id); // Save the submission
     } catch (e) {
-      console.log(e);
+      console.log(e); // Log any errors
     }
 
-    setSubmitted(true);
+    setSubmitted(true); // Mark the quiz as submitted
+
+    // Show a toast notification based on the score
     if (score >= questions.length / 2) {
       toast.success("Congratulations! You did very well!");
     } else {
       toast.error("Better luck next time. Try again!");
     }
-  }
+  };
 
+  // Function to handle navigating to the previous question
   const handlePressPrev = () => {
     if (currentQuestion !== 0) {
-      setCurrentQuestion(prevCurrentQuestion => prevCurrentQuestion - 1);
+      setCurrentQuestion(prevCurrentQuestion => prevCurrentQuestion - 1); // Move to the previous question
     }
-  }
+  };
 
+  // Function to handle exiting the quiz
   const handleExit = () => {
-    router.push('/dashboard');
-  }
+    router.push('/dashboard'); // Navigate back to the dashboard
+  };
 
+  // Calculate the user's score as a percentage
   const scorePercentage: number = Math.round((score / questions.length) * 100);
+
+  // Find the selected answer and check if it is correct
   const selectedAnswer: number | null | undefined = userAnswers.find((item) => item.questionId === questions[currentQuestion].id)?.answerId;
   const isCorrect: boolean | null | undefined = questions[currentQuestion].answers.findIndex((answer) => answer.id === selectedAnswer) !== -1 ? questions[currentQuestion].answers.find((answer) => answer.id === selectedAnswer)?.isCorrect : null;
 
