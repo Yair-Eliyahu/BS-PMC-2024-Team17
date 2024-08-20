@@ -7,35 +7,38 @@ import { Pencil, Save } from 'lucide-react';
 import { CountryDropdown } from 'react-country-region-selector';
 
 const ProfilePage = () => {
+  // State management
   const [bio, setBio] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [gender, setGender] = useState('');
   const [country, setCountry] = useState('');
-  const [countryName, setCountryName] = useState(''); // Store full country name
+  const [countryName, setCountryName] = useState('');
   const [isEditing, setIsEditing] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState(''); // Default avatar
+  const [avatarUrl, setAvatarUrl] = useState('');
 
-  // Load state from local storage
+  // Load state from local storage on component mount
   useEffect(() => {
-    const storedBio = localStorage.getItem('bio');
-    const storedPhoneNumber = localStorage.getItem('phoneNumber');
-    const storedAddress = localStorage.getItem('address');
-    const storedDateOfBirth = localStorage.getItem('dateOfBirth');
-    const storedGender = localStorage.getItem('gender');
-    const storedCountry = localStorage.getItem('country');
-    const storedCountryName = localStorage.getItem('countryName');
-    const storedAvatarUrl = localStorage.getItem('avatarUrl');
+    const storedData = {
+      bio: localStorage.getItem('bio'),
+      phoneNumber: localStorage.getItem('phoneNumber'),
+      address: localStorage.getItem('address'),
+      dateOfBirth: localStorage.getItem('dateOfBirth'),
+      gender: localStorage.getItem('gender'),
+      country: localStorage.getItem('country'),
+      countryName: localStorage.getItem('countryName'),
+      avatarUrl: localStorage.getItem('avatarUrl'),
+    };
 
-    if (storedBio) setBio(storedBio);
-    if (storedPhoneNumber) setPhoneNumber(storedPhoneNumber);
-    if (storedAddress) setAddress(storedAddress);
-    if (storedDateOfBirth) setDateOfBirth(storedDateOfBirth);
-    if (storedGender) setGender(storedGender);
-    if (storedCountry) setCountry(storedCountry);
-    if (storedCountryName) setCountryName(storedCountryName);
-    if (storedAvatarUrl) setAvatarUrl(storedAvatarUrl);
+    if (storedData.bio) setBio(storedData.bio);
+    if (storedData.phoneNumber) setPhoneNumber(storedData.phoneNumber);
+    if (storedData.address) setAddress(storedData.address);
+    if (storedData.dateOfBirth) setDateOfBirth(storedData.dateOfBirth);
+    if (storedData.gender) setGender(storedData.gender);
+    if (storedData.country) setCountry(storedData.country);
+    if (storedData.countryName) setCountryName(storedData.countryName);
+    if (storedData.avatarUrl) setAvatarUrl(storedData.avatarUrl);
   }, []);
 
   // Save state to local storage whenever it changes
@@ -50,77 +53,83 @@ const ProfilePage = () => {
     localStorage.setItem('avatarUrl', avatarUrl);
   }, [bio, phoneNumber, address, dateOfBirth, gender, country, countryName, avatarUrl]);
 
-  const handleEditToggle = () => {
-    setIsEditing(!isEditing);
-  };
+  // Toggle editing mode
+  const handleEditToggle = () => setIsEditing(!isEditing);
 
+  // Handle country selection
   const selectCountry = (val: string, fullCountryName: string) => {
     setCountry(val);
     setCountryName(fullCountryName);
   };
 
-  
   return (
     <div className="space-y-6 text-center">
+      {/* Avatar Section */}
       <div className="flex flex-col items-center space-y-4">
         <Avatar src={avatarUrl} alt="Profile Avatar" size={100} />
         {isEditing && <AvatarGallery onSelect={setAvatarUrl} />}
       </div>
+
+      {/* Profile Information Sections */}
       <div className="space-y-4">
-        <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-white">Bio</h2>
+        {/* Bio */}
+        <ProfileSection title="Bio" isEditing={isEditing}>
           {isEditing ? (
             <textarea
-              className="bg-gray-800 text-white p-2 rounded w-full mt-2"
+              className="profile-input"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
             />
           ) : (
-            <p className="text-gray-300 mt-2">{bio}</p>
+            <p className="profile-text">{bio}</p>
           )}
-        </div>
-        <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-white">Phone Number</h2>
+        </ProfileSection>
+
+        {/* Phone Number */}
+        <ProfileSection title="Phone Number" isEditing={isEditing}>
           {isEditing ? (
             <input
-              className="bg-gray-800 text-white p-2 rounded w-full mt-2"
+              className="profile-input"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
           ) : (
-            <p className="text-gray-300 mt-2">{phoneNumber}</p>
+            <p className="profile-text">{phoneNumber}</p>
           )}
-        </div>
-        <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-white">Address</h2>
+        </ProfileSection>
+
+        {/* Address */}
+        <ProfileSection title="Address" isEditing={isEditing}>
           {isEditing ? (
             <input
-              className="bg-gray-800 text-white p-2 rounded w-full mt-2"
+              className="profile-input"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
           ) : (
-            <p className="text-gray-300 mt-2">{address}</p>
+            <p className="profile-text">{address}</p>
           )}
-        </div>
-        <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-white">Date of Birth</h2>
+        </ProfileSection>
+
+        {/* Date of Birth */}
+        <ProfileSection title="Date of Birth" isEditing={isEditing}>
           {isEditing ? (
             <input
               type="date"
-              className="bg-gray-800 text-white p-2 rounded w-full mt-2"
+              className="profile-input"
               value={dateOfBirth}
               onChange={(e) => setDateOfBirth(e.target.value)}
             />
           ) : (
-            <p className="text-gray-300 mt-2">{dateOfBirth}</p>
+            <p className="profile-text">{dateOfBirth}</p>
           )}
-        </div>
-        <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-white">Gender</h2>
+        </ProfileSection>
+
+        {/* Gender */}
+        <ProfileSection title="Gender" isEditing={isEditing}>
           {isEditing ? (
             <select
-              className="bg-gray-800 text-white p-2 rounded w-full mt-2"
+              className="profile-input"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
@@ -129,26 +138,29 @@ const ProfilePage = () => {
               <option value="other">Other</option>
             </select>
           ) : (
-            <p className="text-gray-300 mt-2 capitalize">{gender}</p>
+            <p className="profile-text capitalize">{gender}</p>
           )}
-        </div>
-        <div className="bg-gray-700 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-white">Country</h2>
+        </ProfileSection>
+
+        {/* Country */}
+        <ProfileSection title="Country" isEditing={isEditing}>
           {isEditing ? (
             <CountryDropdown
               value={country}
               onChange={(val, e) => selectCountry(val, e.target.options[e.target.selectedIndex].text)}
-              className="bg-gray-800 text-white p-2 rounded w-full mt-2"
+              className="profile-input"
               showDefaultOption={false}
               blacklist={['AQ']}
               defaultOptionLabel="Select a country"
               valueType="short"
             />
           ) : (
-            <p className="text-gray-300 mt-2">{countryName}</p>
+            <p className="profile-text">{countryName}</p>
           )}
-        </div>
+        </ProfileSection>
       </div>
+
+      {/* Edit/Save Button */}
       <div className="flex justify-center mt-4">
         <button
           onClick={handleEditToggle}
@@ -161,5 +173,25 @@ const ProfilePage = () => {
     </div>
   );
 };
+
+// Reusable ProfileSection component for better code structure
+const ProfileSection = ({
+  title,
+  isEditing,
+  children,
+}: {
+  title: string;
+  isEditing: boolean;
+  children: React.ReactNode;
+}) => (
+  <div className="bg-gray-700 p-4 rounded-lg shadow-md">
+    <h2 className="text-xl font-semibold text-white">{title}</h2>
+    {children}
+  </div>
+);
+
+// Common class names to reduce repetition
+const profileInputClassNames = "bg-gray-800 text-white p-2 rounded w-full mt-2";
+const profileTextClassNames = "text-gray-300 mt-2";
 
 export default ProfilePage;
