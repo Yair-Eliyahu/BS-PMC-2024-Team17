@@ -32,6 +32,7 @@ export default function RootLayout({
         />
           </body>
       </SessionProvider>
+      
     </html>
   )
 }
